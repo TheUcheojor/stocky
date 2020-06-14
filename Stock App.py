@@ -19,6 +19,7 @@ updatePercentNoti = getNotificationPercentage() #User input for percentage chang
 percentage_change = 0.0
 api_key = '3BDG44KUTR81ZTQF'
 #5 API requests per minute 500 per day, 1 Stock would require 390 requests, link time interval to #of stocks purchased (60/(500/(390*#differentstocksPurchased)))
+#HELLO Jaconb
 
 def testStock():
     getStockVal()
