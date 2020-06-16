@@ -8,7 +8,7 @@ from yahoo_finance_api2.exceptions import YahooFinanceError
     #https://pypi.org/project/yahoo-finance-api2/
 
 #Connects well:
-#For example, try NBR 
+#For example, try NBR
 
 
 
@@ -113,8 +113,9 @@ def getStockInfo(stock):
     print("Stock: "+json.dumps(stock))
 
     try:
-            apistock= share.Share(stock['name']) #We ma have the wrong version
+            apistock= share.Share(stock['name'])
 
+            # print (apistock.get_price_sales())
             return apistock.get_historical(share.PERIOD_TYPE_DAY,10,
                                           share.FREQUENCY_TYPE_MINUTE,5)
     except YahooFinanceError as e:
