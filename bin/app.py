@@ -6,9 +6,9 @@ from yahoo_finance_api2.exceptions import YahooFinanceError
 
 #Resources
     #https://pypi.org/project/yahoo-finance-api2/
-    #https://rapidapi.com/blog/how-to-use-the-yahoo-finance-api/
 
-#We need to read more about them
+#Connects well:
+#For example, try NBR 
 
 
 
