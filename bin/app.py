@@ -104,8 +104,8 @@ def increasingMinMethod(stock,isAutomated): #Remove from testStock to increasing
             minSellVal = 0.95*stockPrice
 
             print("new min sell limit: " + str(minSellVal))
-
     totalEarnings = numberStocks*stockPrice - numberStocks*orgStockVal
+
 
 
 def graphicalAnalysisMethod(stock):
