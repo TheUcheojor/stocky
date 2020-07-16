@@ -1,5 +1,3 @@
 /stocky-backend/node_modules
 /stocky-frontend/node_modules
-/stocky-backend/src/.env
-stocky-backend/src/.env
 *.env
