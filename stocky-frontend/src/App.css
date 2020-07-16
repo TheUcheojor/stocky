@@ -25,6 +25,8 @@ body{
 
 }
 
+
+/* Header Designs - STARTS */
 #header{
   grid-area:header;
   background:#566270;
@@ -39,7 +41,10 @@ body{
   align-items: center;
   justify-content: center;
 }
+/* Header Designs - ENDS */
 
+
+/* Horizontal Bar Design - STARTS */
 #hor-bar{
   grid-area:hor-bar;
   background: #FFFFF3;
@@ -48,7 +53,8 @@ body{
   display: flex;
   justify-content:space-between;
   align-items: center;
-  box-shadow: 0 0 200px -20px rgba(57,55,73,.4);
+  /* box-shadow: 0 0 200px -20px rgba(57,55,73,.4); */
+
 }
 
 .search-bar{
@@ -73,6 +79,11 @@ body{
   font-weight: 900;
 }
 
+/* Horizontal Bar Design - ENDS */
+
+
+
+/* Vertical Bar Design - STARTS */
 #vert-bar{
   grid-area:vert-bar;
   background-color: #566270;
@@ -97,14 +108,70 @@ body{
   font-weight: bold;
 }
 
+/* Vertical Bar Design - ENDS */
 
+
+/* Content Design - STARTS */
 #content{
   grid-area:content;
   background:#E0E3DA;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 120px 1fr 1fr;
+
+  grid-template-areas:
+  "account-details .  daily-profit"
+  "live-overview live-overview api-info"
+  "order-history order-history manual-order"
+  ;
+
+  grid-gap:15px;
+
 }
 
+.container{
+  background-color: #FFFFF3;
+  border-radius: 15px;
+  box-shadow: 0 0rem 9.375rem rgba(90,97,105,.1), 0 0.25rem 0.5rem rgba(90,97,105,.12), 0 0.9375rem 1.375rem rgba(90,97,105,.1), 0 0.4375rem 2.1875rem rgba(165,182,201,.1);
+  margin: 10px 10px;
+}
+
+.account-details{
+  grid-area: account-details ;
+
+}
+
+.daily-profit{
+  grid-area: daily-profit ;
+}
+
+.live-overview{
+  grid-area: live-overview ;
+}
+
+.api-info{
+  grid-area: api-info ;
+}
+
+.order-history{
+  grid-area: order-history ;
+}
+
+.manual-order{
+  grid-area: manual-order;
+}
+
+
+
+
+
+/* Content Design - ENDS */
+
+
+/* Footer Design - STARTS */
 #footer{
   grid-area:footer;
   background: #A593E0;
 }
-
+/* Footer Design - ENDS */
