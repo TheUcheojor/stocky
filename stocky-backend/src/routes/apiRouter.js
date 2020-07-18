@@ -5,6 +5,19 @@ import MeanReversion from '../trading/strategies/mean-reversion'
 const apiRouter = express.Router()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Temporary Setup to test stategies
 
 import keys from '../config/setup'

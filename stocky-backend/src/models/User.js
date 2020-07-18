@@ -15,7 +15,8 @@ const userSchema=mongoose.Schema({
     },
     settings:{
         strategy:String,     
-    }
+    },
+    orderHistoryReference: { type:mongoose.Schema.Types.ObjectId, ref:'User'},
 
 })
 
