@@ -29,7 +29,7 @@ body{
 /* Header Designs - STARTS */
 #header{
   grid-area:header;
-  background:#566270;
+  background:rgba(86, 98, 112, 1);
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-variant: small-caps;
   font-size: 1.5em;
@@ -40,6 +40,7 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 5px solid #fff ;
 }
 /* Header Designs - ENDS */
 
@@ -47,12 +48,14 @@ body{
 /* Horizontal Bar Design - STARTS */
 #hor-bar{
   grid-area:hor-bar;
-  background: #FFFFF3;
-  color: #566270;
+  background: rgba(86, 98, 112, 0.95);
+  color: rgba(86, 98, 112, 0.85);
 
   display: flex;
   justify-content:space-between;
   align-items: center;
+  border-bottom: 5px solid #A593E0 ;
+  /* rgba(86, 98, 112, 1) */
   /* box-shadow: 0 0 200px -20px rgba(57,55,73,.4); */
 
 }
@@ -61,7 +64,7 @@ body{
   margin-left: 10px;
   padding: 10px 10px;
   width:60%;
-  background: #E0E3DA;
+  background: #fff;
   border: none;
   border-radius: 10px;
 }
@@ -114,7 +117,7 @@ body{
 /* Content Design - STARTS */
 #content{
   grid-area:content;
-  background:#E0E3DA;
+  background:rgba(86, 98, 112, 0.75);
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -128,10 +131,11 @@ body{
 
   grid-gap:15px;
 
+
 }
 
 .container{
-  background-color: #FFFFF3;
+  background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 0rem 9.375rem rgba(90,97,105,.1), 0 0.25rem 0.5rem rgba(90,97,105,.12), 0 0.9375rem 1.375rem rgba(90,97,105,.1), 0 0.4375rem 2.1875rem rgba(165,182,201,.1);
   margin: 10px 10px;

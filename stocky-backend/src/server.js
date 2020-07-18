@@ -3,6 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import path from 'path'
+import keys from './config/setup'
 
 import userRouter from './routes/userRouter'
 import apiRouter from './routes/apiRouter'
@@ -15,7 +16,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 //Connect to Database
 (async ()=>{
 
-    const URI = process.env.URI 
+    const URI = keys.URI 
     console.log(URI)
 
     await mongoose.connect(URI, {
