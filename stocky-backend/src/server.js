@@ -39,8 +39,8 @@ const PORT= process.env.PORT || 8000
 app.use(bodyParser.json())
 
 app.use('/users',userRouter)
-app.use('/settings',userRouter)
-app.use('/api',userRouter)
+app.use('/settings',settingsRouter)
+app.use('/api',apiRouter)
 
 
 app.listen(PORT,()=>{
