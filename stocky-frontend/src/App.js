@@ -29,7 +29,7 @@ function App() {
           <VerticalNavBar />
           <HorizontalBar />
           <Switch>
-                  <Route  path='/'  component={OverviewPage}  exact  />
+                  <Route  path='/'  component={()=>(<OverviewPage email='paul@gmail.com' />) }  exact  />
                   <Route  path='/about'  component={AboutPage}    />
                   <Route  path='/settings'  component={SettingsPage}    />
                   <Route  path='/stocks/:name'  component={StockPage}    />

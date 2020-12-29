@@ -9,6 +9,7 @@ const OrderHistory=mongoose.Schema({
             shares:Number,
             pricePerShare:Number,
             status:String,
+            
         }
     ]
 
