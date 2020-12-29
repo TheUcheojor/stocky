@@ -1,21 +1,7 @@
 
-import Alpaca from '@alpacahq/alpaca-trade-api'
-import keys from '../../config/setup'
-
-const userTradingConfig ={
-    API_KEY: keys.API_KEY,
-    SECRET_KEY: keys.SECRET_KEY,
-    stocks: ["AAPLE","GOOG","MSFT"],
-    exitPoint: 0,
-    fixedStopLoss:0,
-}
-
-
-PAPER=true
-
 class MeanReversion {
-  constructor(API_KEY, API_SECRET, stocks){
-    this.Alpaca = require('@alpacahq/alpaca-trade-api');
+  constructor(API_KEY, API_SECRET, PAPER){
+    this.Alpaca = require('./node_modules/@alpacahq/alpaca-trade-api');
     this.alpaca = new this.Alpaca({
       keyId: API_KEY,
       secretKey: API_SECRET,
@@ -25,8 +11,7 @@ class MeanReversion {
     this.lastOrder = null;
     this.timeToClose = null;
     // Stock that the algo will trade.
-    // this.stock = "AAPL";
-    this.stocks=stocks
+    this.stock = "AAPL";
   }
 
   async run(){
