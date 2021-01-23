@@ -42,7 +42,7 @@ const OverviewPage=({ email })=>{
                     setEquity(' N/A')
                     setBuyingPower('N/A')
 
-                        }
+                }
 
                     })();
 
@@ -77,7 +77,7 @@ const OverviewPage=({ email })=>{
                     setEquity(' N/A')
                     setBuyingPower('N/A')
 
-                        }
+                }
 
             })();
 
