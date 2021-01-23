@@ -37,6 +37,7 @@ userRouter.post('/login',(req,res)=>{
 
     const {email, password}= req.body
 
+    console.log("Recieved /user/login request")
 
     User.findOne({email:email.toLowerCase().trim()})
     .then((user)=>{
@@ -53,7 +54,6 @@ userRouter.post('/login',(req,res)=>{
             //     settings:user.settings,
             //     orderHistoryReference:(user.orderHistoryReference)? user.orderHistoryReference.toHexString():'' ,
             // }
-    
             res.status(200).json({success:true, data:user.email})
 
         }
@@ -70,7 +70,7 @@ userRouter.post('/login',(req,res)=>{
         res.status(500).json({
             success:false,
             message:'Wrong Credentials ',
-            error:err,
+            error:`${err}`,
         })
     })
 
@@ -79,44 +79,9 @@ userRouter.post('/login',(req,res)=>{
 })
 
 
-userRouter.post('/user-portfolio', (req,res)=>{
 
-    const { email }= req.body
+userRouter.get('/account', (req,res)=>{
 
-    User.findOne({email:email})
-    .then( (user)=>{
-
-
-        const alpaca=connectToAlpaca(user)
-
-        console.log("Getting Positions..")
-        alpaca.getPositions()
-        .then((portfolio) => {
-
-            let portfolioDetails={};
-
-            // Print the quantity of shares for each position.
-            portfolio.forEach(function (position) {
-                portfolioDetails[position.symbol]=position.qty
-            })
-
-            res.status(200).json({success:true, data:portfolioDetails})
-
-        }).catch(err=>{
-            console.log(err)
-            res.status(500).json({success:false,message:'Cannot get portfolio'})
-        })
-
-    }).catch(err=>{
-        console.log(err)
-        res.status(500).json({success:false,message:' Account does not exist'})
-    })
-    
-    
-
-})
-
-userRouter.post('/account', (req,res)=>{
 
     const { email}=req.body
 
@@ -129,14 +94,15 @@ userRouter.post('/account', (req,res)=>{
         .then((account)=>{
 
             account['strategy']=user['settings']['strategy']
-            res.status(200).send({success:true,data:account})
+            res.status(200).json({success:true,data:account})
         
         }).catch((err)=>{
-            res.status(500).send({success:false,message:'Could not connect to Alpaca'})
+            res.status(500).json({success:false,message:`${err}`})
         })
 
     }).catch((err)=>{
-        res.status(500).send({success:false, message:"Server Error"})
+        console.log(`error: ${err}`)
+        res.status(500).json({success:false, message:`${err}`})
     })
 
 
