@@ -1,5 +1,6 @@
 import express from 'express'
 import User from '../models/User'
+import Strategy from '../trading/strategyController'
 
 const settingsRouter = express.Router()
 
@@ -36,10 +37,25 @@ settingsRouter.get("/set-strategy",(req,res)=>{
 
     //COME BACK TO THIS....Thinking of how to integrate background tasks
     User.updateOne( {email: email}, {$set: {
-        "settings.strategy": secretKey,
+        "settings.strategy": strategy,
     }})
+    .then( ()=>{
+        
+        User.find({email:email})
+        .then( (user)=>{
+            
+            const userStrategy= Strategy(user);
+            userStrategy.runStrategy();
+            
+        })
+        .catch(error=>res.status(500).json({success:false, message:`${error}`}))
 
-    .then( ()=>res.status(200).json( {success:true, data:email}) )
+
+
+        // res.status(200).json( {success:true, data:email})
+    
+
+    }).catch(error => res.status(500).json({success:false, message:`${error}`}))
 
 })
 
