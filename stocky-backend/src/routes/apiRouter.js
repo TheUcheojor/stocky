@@ -14,7 +14,7 @@ const apiRouter = express.Router()
 
 // apiRouter.get('/user-portfolio', (req,res)=>{
 
-//     const { email }= req.body
+//     const { email }= req.query
 
 //     User.findOne({email:email})
 //     .then( (user)=>{
@@ -50,7 +50,7 @@ const apiRouter = express.Router()
 
 apiRouter.get('/get-order-history', (req,res)=>{
 
-    const { email } = req.body;
+    const { email } = req.query;
 
     User.findOne({email:email})
     .then((user)=>{
@@ -121,9 +121,9 @@ apiRouter.get('/get-order-history', (req,res)=>{
 
 
 
-apiRouter.get('/search/:query',(req,res)=>{
+apiRouter.get('/search',(req,res)=>{
 
-    const {query}=req.params
+    const {query}=req.query
 
     const STOCK_PROFILE_API="https://TheUcheojor.github.io/stocky-reference-data/stock-profiles.json"
     const SIMILARITY_CONSTANT=0.3
@@ -155,9 +155,9 @@ apiRouter.get('/search/:query',(req,res)=>{
 })
 
 //May not be needed in the future as search provides similar functionality
-apiRouter.get('/stocks/:name',(req,res)=>{
+apiRouter.get('/stocks',(req,res)=>{
 
-    const name=req.params.name
+    const {name}=req.query
 
     const STOCK_PROFILE_API="https://TheUcheojor.github.io/stocky-reference-data/stock-profiles.json"
     

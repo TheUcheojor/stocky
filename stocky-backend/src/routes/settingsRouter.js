@@ -5,7 +5,7 @@ import Strategy from '../trading/strategyController'
 const settingsRouter = express.Router()
 
 
-settingsRouter.get("/set-password",(req,res)=>{
+settingsRouter.post("/set-password",(req,res)=>{
 
     const {email, password}= req.body;
 
@@ -17,7 +17,7 @@ settingsRouter.get("/set-password",(req,res)=>{
 })
 
 
-settingsRouter.get("/set-alpaca",(req,res)=>{
+settingsRouter.post("/set-alpaca",(req,res)=>{
 
     const {email, secretKey, apiKey}= req.body;
 
@@ -31,7 +31,7 @@ settingsRouter.get("/set-alpaca",(req,res)=>{
 
 })
 
-settingsRouter.get("/set-strategy",(req,res)=>{
+settingsRouter.post("/set-strategy",(req,res)=>{
 
     const {email, strategy}= req.body;
 
@@ -61,7 +61,7 @@ settingsRouter.get("/set-strategy",(req,res)=>{
 
 })
 
-settingsRouter.get("/add-stock", (req, res)=>{
+settingsRouter.post("/add-stock", (req, res)=>{
 
     const {email, stockSymbol }= req.body;
 
@@ -87,7 +87,7 @@ settingsRouter.get("/add-stock", (req, res)=>{
 
 })
 
-settingsRouter.get("/remove-stock", (req, res)=>{
+settingsRouter.delete("/remove-stock", (req, res)=>{
 
     const {email, stockSymbol }= req.body;
 

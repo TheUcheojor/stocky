@@ -82,7 +82,9 @@ userRouter.post('/login',(req,res)=>{
 userRouter.get('/account', (req,res)=>{
 
 
-    const { email}=req.body
+    const { email }=req.query
+
+    console.log(req.params)
 
     User.findOne({email:email })
     .then((user)=>{
