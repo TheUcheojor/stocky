@@ -35,29 +35,85 @@ settingsRouter.get("/set-strategy",(req,res)=>{
 
     const {email, strategy}= req.body;
 
-    //COME BACK TO THIS....Thinking of how to integrate background tasks
     User.updateOne( {email: email}, {$set: {
         "settings.strategy": strategy,
     }})
     .then( ()=>{
         
-        User.find({email:email})
+        User.findOne({email:email})
         .then( (user)=>{
             
-            const userStrategy= Strategy(user);
+            // console.log(user)
+            const userStrategy=new Strategy(user);
             userStrategy.runStrategy();
+            
+            console.log(`\nStrategy ${strategy} has been started for ${user.email}`)
+            res.status(200).json( {success:true, data:email})
             
         })
         .catch(error=>res.status(500).json({success:false, message:`${error}`}))
 
 
 
-        // res.status(200).json( {success:true, data:email})
     
 
     }).catch(error => res.status(500).json({success:false, message:`${error}`}))
 
 })
+
+settingsRouter.get("/add-stock", (req, res)=>{
+
+    const {email, stockSymbol }= req.body;
+
+    User.updateOne({email:email}, {$addToSet: {'alpaca.stocks': stockSymbol} })
+    .then(()=>{
+
+        User.findOne({email:email})
+        .then((user)=>{
+            const userStrategy= new Strategy(user);
+            
+            userStrategy.runStrategy();
+                
+            console.log(`\nStrategy ${user.settings.strategy} has been restarted for ${user.email}`)
+            console.log(`${stockSymbol} has been added the stock container associated to ${user.email}\n`)
+
+            res.status(200).json( {success:true, data:email})
+        })
+        .catch(error=>res.status(500).json({success:false, message:`${error}`}))
+        
+
+    }).catch(error=>res.status(500).json({success:false, message:`${error}`}))
+    
+
+})
+
+settingsRouter.get("/remove-stock", (req, res)=>{
+
+    const {email, stockSymbol }= req.body;
+
+    User.updateOne({email:email}, {$pull: {'alpaca.stocks': stockSymbol} })
+    .then(()=>{
+
+        User.findOne({email:email})
+        .then((user)=>{
+            const userStrategy=new  Strategy(user);
+            userStrategy.runStrategy();
+                
+            console.log(`\nStrategy ${user.settings.strategy} has been restarted for ${user.email}`)
+            console.log(`${stockSymbol} has been removed the stock container associated to ${user.email}\n`)
+    
+            res.status(200).json( {success:true, data:email})
+        })
+        .catch(error=>res.status(500).json({success:false, message:`${error}`}))
+       
+
+    }).catch(error=>res.status(500).json({success:false, message:`${error}`}))
+    
+
+})
+
+
+
 
 
 
