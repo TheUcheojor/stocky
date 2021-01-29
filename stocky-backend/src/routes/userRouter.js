@@ -1,7 +1,6 @@
 import express from 'express'
 
 import User from '../models/User'
-import OrderHistory from '../models/OrderHistory'
 import keys from '../config/setup'
 
 import connectToAlpaca from '../auxilliary/connectToAlpaca'
