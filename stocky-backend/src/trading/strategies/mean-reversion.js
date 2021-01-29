@@ -2,14 +2,6 @@
 import Alpaca from '@alpacahq/alpaca-trade-api'
 import keys from '../../config/setup'
 
-const userTradingConfig ={
-    API_KEY: keys.API_KEY,
-    API_SECRET: keys.SECRET_KEY,
-    stocks: ["AAPLE","GOOG","MSFT"],
-    exitPoint: 0,
-    fixedStopLoss:0,
-}
-
 
 const PAPER=true
 
@@ -25,6 +17,9 @@ class MeanReversion {
       secretKey: secretKey,
       paper: PAPER
     });
+
+    this.keyId=apiKey;
+    this.secretKey=secretKey;
 
     this.stocks=stocks
     this.runningAverages = {};
@@ -44,11 +39,15 @@ class MeanReversion {
     // this.stock = "AAPL";
         
   }
+  
+  getStrategyName(){
+    return "MEAN_REVERSION"
+  }
 
   getAuthentication(){
     return {
-      secretKey:this.keyId,
-      apiKey:this.secretKey
+      apiKey:this.keyId,
+      secretKey:this.secretKey
     }
   }
 
@@ -302,20 +301,26 @@ class MeanReversion {
 
 MeanReversion.instances=[];
 MeanReversion.create=function(user){
-    let meanReversionClass=new MeanReversion(user).alpaca;
+    let meanReversionClass=new MeanReversion(user.alpaca);
     MeanReversion.instances.push(meanReversionClass);
     return meanReversionClass;
 }
 
-MeanReversion.remove=function({user}){
-    
-  MeanReversion.instances.filter((meanReversionInstance)=>{
-      
-    instanceAuthentication=meanReversionInstance.getAuthentication()
-    userAuthentication=user.alpaca
+MeanReversion.remove=function(user){
 
-    return instanceAuthentication.apiKey==userAuthentication.apiKey &&
-      instanceAuthentication.secretKey==userAuthentication.secretKey    
+  MeanReversion.instances= MeanReversion.instances.filter((meanReversionInstance)=>{
+      
+    const instanceAuthentication=meanReversionInstance.getAuthentication()
+    const userAuthentication=user.alpaca
+
+    if(instanceAuthentication.apiKey==userAuthentication.apiKey &&
+      instanceAuthentication.secretKey==userAuthentication.secretKey){
+
+        console.log(`\nRemoving currently-running strategy (${meanReversionInstance.getStrategyName()}) of ${user.email}`)
+    }
+
+    return instanceAuthentication.apiKey!=userAuthentication.apiKey &&
+      instanceAuthentication.secretKey!=userAuthentication.secretKey    
   })
 
 }

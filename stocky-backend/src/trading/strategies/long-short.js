@@ -8,14 +8,16 @@ const SideType = { BUY: 'buy', SELL: 'sell' }
 const PositionType = { LONG: 'long', SHORT: 'short' }
 
 class LongShort {
-  constructor ({ keyId, secretKey, stocks, paper = true, bucketPct = 0.25 }) {
+  constructor ({ apiKey, secretKey, stocks, paper = true, bucketPct = 0.25 }) {
     this.alpaca = new Alpaca({
-      keyId: keyId,
+      keyId: apiKey,
       secretKey: secretKey,
       paper: paper,
       usePolygon: USE_POLYGON
     })
 
+    this.keyId=apiKey;
+    this.secretKey=secretKey;
     // let stocks = ['DOMO', 'TLRY', 'SQ', 'MRO', 'AAPL', 'GM', 'SNAP', 'SHOP', 'SPLK', 'BA', 'AMZN', 'SUI', 'SUN', 'TSLA', 'CGC', 'SPWR', 'NIO', 'CAT', 'MSFT', 'PANW', 'OKTA', 'TWTR', 'TM', 'RTN', 'ATVI', 'GS', 'BAC', 'MS', 'TWLO', 'QCOM']
 
     this.stockList = stocks.map(item => ({ name: item, pc: 0 }))
@@ -33,10 +35,14 @@ class LongShort {
     this.bucketPct = bucketPct
   }
 
+  getStrategyName(){
+    return "LONG_SHORT"
+  }
+
   getAuthentication(){
     return {
-      secretKey:this.keyId,
-      apiKey:this.secretKey
+      apiKey:this.keyId,
+      secretKey:this.secretKey
     }
   }
 
@@ -494,15 +500,21 @@ LongShort.create=function(user){
     return logShortClass;
 }
 
-LongShort.remove=function({user}){
+LongShort.remove=function(user){
     
-  LongShort.instances.filter((longShortInstance)=>{
+  LongShort.instances=LongShort.instances.filter((longShortInstance)=>{
       
-    instanceAuthentication=longShortInstance.getAuthentication()
-    userAuthentication=user.alpaca
+    const instanceAuthentication=longShortInstance.getAuthentication()
+    const userAuthentication=user.alpaca
 
-    return instanceAuthentication.apiKey==userAuthentication.apiKey &&
-      instanceAuthentication.secretKey==userAuthentication.secretKey    
+    if(instanceAuthentication.apiKey==userAuthentication.apiKey &&
+      instanceAuthentication.secretKey==userAuthentication.secretKey){
+
+        console.log(`\nRemoving currently-running strategy (${longShortInstance.getStrategyName()}) of ${user.email}`)
+    }
+
+    return instanceAuthentication.apiKey!=userAuthentication.apiKey &&
+      instanceAuthentication.secretKey!=userAuthentication.secretKey    
   })
 
 }
