@@ -11,14 +11,13 @@ const userSchema=mongoose.Schema({
     alpaca:{
         secretKey:String,
         apiKey:String,
-        equity:Number,
-        buying_power:Number
+        stocks:[{
+            type:String
+        }]   
     },
     settings:{
-        strategy:String,     
-    },
-    orderHistoryReference:{ type:mongoose.Schema.Types.ObjectId, ref:'User'},
-    
+        strategy:String,  
+    },    
 })
 
 export default mongoose.model('User',userSchema,'users');
