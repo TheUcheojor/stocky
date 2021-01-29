@@ -8,7 +8,7 @@ const SideType = { BUY: 'buy', SELL: 'sell' }
 const PositionType = { LONG: 'long', SHORT: 'short' }
 
 class LongShort {
-  constructor ({ keyId, secretKey, paper = true, bucketPct = 0.25 }) {
+  constructor ({ keyId, secretKey, stocks, paper = true, bucketPct = 0.25 }) {
     this.alpaca = new Alpaca({
       keyId: keyId,
       secretKey: secretKey,
@@ -16,7 +16,8 @@ class LongShort {
       usePolygon: USE_POLYGON
     })
 
-    let stocks = ['DOMO', 'TLRY', 'SQ', 'MRO', 'AAPL', 'GM', 'SNAP', 'SHOP', 'SPLK', 'BA', 'AMZN', 'SUI', 'SUN', 'TSLA', 'CGC', 'SPWR', 'NIO', 'CAT', 'MSFT', 'PANW', 'OKTA', 'TWTR', 'TM', 'RTN', 'ATVI', 'GS', 'BAC', 'MS', 'TWLO', 'QCOM']
+    // let stocks = ['DOMO', 'TLRY', 'SQ', 'MRO', 'AAPL', 'GM', 'SNAP', 'SHOP', 'SPLK', 'BA', 'AMZN', 'SUI', 'SUN', 'TSLA', 'CGC', 'SPWR', 'NIO', 'CAT', 'MSFT', 'PANW', 'OKTA', 'TWTR', 'TM', 'RTN', 'ATVI', 'GS', 'BAC', 'MS', 'TWLO', 'QCOM']
+
     this.stockList = stocks.map(item => ({ name: item, pc: 0 }))
 
     this.long = []
@@ -30,6 +31,13 @@ class LongShort {
     this.shortAmount = 0
     this.timeToClose = null
     this.bucketPct = bucketPct
+  }
+
+  getAuthentication(){
+    return {
+      secretKey:this.keyId,
+      apiKey:this.secretKey
+    }
   }
 
   // Submit an order if quantity is above 0.
@@ -478,13 +486,26 @@ function log (text) {
   console.log(text)
 }
 
+
+LongShort.instances=[];
+LongShort.create=function(user){
+    let logShortClass=new LongShort(user.alpaca);
+    LongShort.instances.push(logShortClass);
+    return logShortClass;
+}
+
+LongShort.remove=function({user}){
+    
+  LongShort.instances.filter((longShortInstance)=>{
+      
+    instanceAuthentication=longShortInstance.getAuthentication()
+    userAuthentication=user.alpaca
+
+    return instanceAuthentication.apiKey==userAuthentication.apiKey &&
+      instanceAuthentication.secretKey==userAuthentication.secretKey    
+  })
+
+}
+
 module.exports=LongShort;
 
-// // Run the LongShort class
-// let ls = new LongShort({
-//   keyId: API_KEY,
-//   secretKey: API_SECRET,
-//   paper: true
-// })
-//
-// ls.run()

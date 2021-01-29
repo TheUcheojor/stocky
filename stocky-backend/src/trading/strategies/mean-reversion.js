@@ -15,14 +15,14 @@ const PAPER=true
 
 class MeanReversion {
 
-  constructor({API_KEY, API_SECRET, stocks}){
+  constructor({apiKey, secretKey, stocks}){
     // this.Alpaca = require('@alpacahq/alpaca-trade-api');
 
     // console.log(API_KEY, API_SECRET, stocks)
 
     this.alpaca = new Alpaca({
-      keyId: API_KEY,
-      secretKey: API_SECRET,
+      keyId: apiKey,
+      secretKey: secretKey,
       paper: PAPER
     });
 
@@ -43,6 +43,13 @@ class MeanReversion {
 
     // this.stock = "AAPL";
         
+  }
+
+  getAuthentication(){
+    return {
+      secretKey:this.keyId,
+      apiKey:this.secretKey
+    }
   }
 
   async run(){
@@ -293,7 +300,27 @@ class MeanReversion {
 }
 
 
-module.exports=MeanReversion;
+MeanReversion.instances=[];
+MeanReversion.create=function(user){
+    let meanReversionClass=new MeanReversion(user).alpaca;
+    MeanReversion.instances.push(meanReversionClass);
+    return meanReversionClass;
+}
+
+MeanReversion.remove=function({user}){
+    
+  MeanReversion.instances.filter((meanReversionInstance)=>{
+      
+    instanceAuthentication=meanReversionInstance.getAuthentication()
+    userAuthentication=user.alpaca
+
+    return instanceAuthentication.apiKey==userAuthentication.apiKey &&
+      instanceAuthentication.secretKey==userAuthentication.secretKey    
+  })
+
+}
+
+export default MeanReversion;
 
 
 // // Run the mean reversion class.
