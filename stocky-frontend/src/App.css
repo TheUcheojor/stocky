@@ -154,7 +154,8 @@ body{
 }
 
 .container-subtitles{
-  margin: 10px 5px;
+  position: relative;
+  margin: 5px 5px;
   font-size: 20px;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -176,18 +177,68 @@ body{
   grid-area: daily-profit ;
 }
 
+.container-subtitles.daily-profit{
+  position: relative;
+  top: 50%;
+  right: 50%;
+  font-size: 22px;
+  transform: translate(50%,-90%);
+
+}
 .live-overview{
   grid-area: live-overview ;
 }
 
+/*  Aplaca Information */
 .api-info{
   grid-area: api-info ;
 }
 
+.alpaca-form{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  text-align: left;
+  margin: 10px 5px;
+}
+
+.alpaca-form span.aplaca-info-title{
+  font-size: 12px ;
+}
+
+.alpaca-form input.aplaca-info {
+  font-size: 12px;
+  width: 100%;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: scroll;
+}
+
+.alpaca-form #saveApiSettings {
+  width: 100%;
+  background-color: rgba(76, 175, 80, 1);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.alpaca-form #saveApiSettings:hover{
+  background-color: rgba(76, 175, 80, 0.8);
+}
+
+/* Order History */
 .order-history{
   grid-area: order-history ;
 }
 
+/* Manual Order */
 .manual-order{
   grid-area: manual-order;
 }
