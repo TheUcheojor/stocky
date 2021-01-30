@@ -6,9 +6,9 @@ import saveAplacaSettings from './support/saveAlpacaSetting'
 const OverviewPage=({ email })=>{
 
 
-    const [ equity, setEquity ] =useState('0');
-    const [ buyingPower, setBuyingPower ] =useState('0');
-    const [ dailyEarning, setDailyEarning ] =useState('0')
+    const [ equity, setEquity ] =useState(0);
+    const [ buyingPower, setBuyingPower ] =useState(0);
+    const [ dailyEarning, setDailyEarning ] =useState(0)
     const [ secretKey, setSecretKey ] =useState('')
     const [ apiKey, setApiKey ] =useState('')
 
