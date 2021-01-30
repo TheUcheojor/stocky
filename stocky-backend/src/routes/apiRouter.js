@@ -12,41 +12,6 @@ import connectToAlpaca from '../auxilliary/connectToAlpaca'
 const apiRouter = express.Router()
 
 
-// apiRouter.get('/user-portfolio', (req,res)=>{
-
-//     const { email }= req.query
-
-//     User.findOne({email:email})
-//     .then( (user)=>{
-
-
-//         const alpaca=connectToAlpaca(user)
-
-//         console.log("Getting Positions..")
-//         alpaca.getPositions()
-//         .then((portfolio) => {
-
-//             let portfolioDetails={};
-
-//             // Print the quantity of shares for each position.
-//             portfolio.forEach(function (position) {
-//                 portfolioDetails[position.symbol]=position.qty
-//             })
-
-//             res.status(200).json({success:true, data:portfolioDetails})
-
-//         }).catch(err=>{
-//             console.log(err)
-//             res.status(500).json({success:false,message:'Cannot get portfolio'})
-//         })
-
-//     }).catch(err=>{
-//         console.log(err)
-//         res.status(500).json({success:false,message:' Account does not exist'})
-//     })
-    
-    
-// })
 
 apiRouter.get('/get-order-history', (req,res)=>{
 
@@ -86,32 +51,33 @@ apiRouter.get('/get-order-history', (req,res)=>{
                     callback()
 
                 }).catch(error=>{
-                    console.log(`error: ${error}`)
+                    console.log(`\n/get-order-history - FAILURE - error: ${error}`)
                     res.status(500).json({success:false, message:`${error}`})
                 })
 
 
             }  ).then( ()=>{
-
+                console.log(`\n/get-order-history - SUCCESS`)
                 res.status(200).json({success:true, data:formattedActivities})
 
             }).catch(err=>{
-                res.status(500).json({success:false, message:`${err}`})
+                console.log(`\n/get-order-history - FAILURE - error: ${err}`)
+                res.status(500).json({success:false, message:`Error getting account activities`,error:`${err}`})
             })
             
 
 
 
         }).catch( (error)=>{
-            console.log(`error: ${error}`)
+            console.log(`\n/get-order-history - FAILURE - error: ${error}`)
 
-            res.status(500).json({success:false, message:`${error}`})
+            res.status(500).json({success:false, message:`Server Error. Cannot acess account-activities`,error:`${error}`})
         })
 
 
     }).catch( (error)=>{
-
-        res.status(500).json({success:false, message:"No User associated with the given email"})
+        console.log(`\n/get-order-history - FAILURE - error: ${error}`)
+        res.status(500).json({success:false, message:"No User associated with the given email", error:`${error}`})
 
     } )
 
@@ -138,18 +104,18 @@ apiRouter.get('/search',(req,res)=>{
         let desiredStockProfiles=stockProfiles.filter((stockProfile)=>{ 
             
             console.log(`${query} : StringSimilarity.compareTwoStrings(stockProfile.symbol, query ):  ${StringSimilarity.compareTwoStrings(stockProfile.symbol.toLowerCase(), query.toLowerCase() )}`)
-        console.log(`${query} : StringSimilarity.compareTwoStrings(stockProfile.name, query ) : ${StringSimilarity.compareTwoStrings(stockProfile.name.toLowerCase(), query.toLowerCase() )}`)
+            console.log(`${query} : StringSimilarity.compareTwoStrings(stockProfile.name, query ) : ${StringSimilarity.compareTwoStrings(stockProfile.name.toLowerCase(), query.toLowerCase() )}`)
 
 
               return  StringSimilarity.compareTwoStrings(stockProfile.symbol.toLowerCase(), query.toLowerCase() ) > SIMILARITY_CONSTANT
             || StringSimilarity.compareTwoStrings(stockProfile.name.toLowerCase(), query.toLowerCase() ) > SIMILARITY_CONSTANT
         }
             )
-        console.log(`${query} : ${desiredStockProfiles}`)
-        
+        console.log(`\n/api/search - SUCCESS`)
+        console.log(`\n${query} : ${desiredStockProfiles}`)
         res.status(200).json({success:true, data: desiredStockProfiles })
     }).catch(err=>{
-        res.status(500).json({success:false, message:`${err}`})
+        res.status(500).json({success:false, message:`Server Error. Cannot access stock profiles`, error:`${err}`})
     })
     
 })
@@ -172,11 +138,13 @@ apiRouter.get('/stocks',(req,res)=>{
             stockProfile.symbol.toLowerCase()==name.toLowerCase()
             || stockProfile.name.toLowerCase()==name.toLowerCase() )
 
+        console.log(`\n/api/stocks - SUCCESS`)
         console.log(`${name} : ${desiredStockProfile}`)
 
         res.status(200).json({success:true, data: desiredStockProfile })
     }).catch(err=>{
-        res.status(500).json({success:false, message:`${err}`})
+        console.log(`\n/api/stocks - FAILURE - ${err}`)
+        res.status(500).json({success:false, message:`Server Error. Cannot access stock-profiles`,error:`${err}`})
     })
     
 })
