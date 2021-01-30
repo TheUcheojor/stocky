@@ -8,8 +8,6 @@ import account from '@alpacahq/alpaca-trade-api/lib/resources/account'
 
 const userRouter = express.Router()
 
-//const ObjectID = require('mongodb').ObjectID;
-//ObjectID.createFromHexString(organization.connection_str.trim());
 
 userRouter.post('/sign-up',(req,res)=>{
 
@@ -28,7 +26,7 @@ userRouter.post('/sign-up',(req,res)=>{
         res.status(200).json({success:true,message:'Account Created'})
     }).catch( (err)=>{
         console.log(err)
-        res.status(500).json({success:false,message:err} )
+        res.status(500).json({success:false,message:"Cannot create the user", error:`${err}` } )
     })
 })
 
@@ -44,31 +42,20 @@ userRouter.post('/login',(req,res)=>{
         console.log(user._id)
 
         if(password==user.password){
-
-            // console.log("EQUAL!")
-            // var infoPackage={
-            //     email:user.email,
-            //     userReference:user._id.toHexString(),
-            //     alpaca:user.alpaca,
-            //     settings:user.settings,
-            //     orderHistoryReference:(user.orderHistoryReference)? user.orderHistoryReference.toHexString():'' ,
-            // }
             res.status(200).json({success:true, data:user.email})
-
         }
         
         res.status(500).json({
             success:false,
-            message:'Wrong Credentials',
-            error:'',
+            message:'Enter valid creditials',
+            error:'Passwords are not equal',
         })
 
     }).catch( (err)=>{
-        
-        console.log(err)
+        console.log(`\n /users/login - FAILE -${err} `)
         res.status(500).json({
             success:false,
-            message:'Wrong Credentials ',
+            message:'Enter valid creditials',
             error:`${err}`,
         })
     })
@@ -84,8 +71,6 @@ userRouter.get('/account', (req,res)=>{
 
     const { email }=req.query
 
-    console.log(req.params)
-
     User.findOne({email:email })
     .then((user)=>{
 
@@ -95,14 +80,18 @@ userRouter.get('/account', (req,res)=>{
         .then((account)=>{
 
             account['strategy']=user['settings']['strategy']
+            account['alpaca']=user['alpaca']
+
+            console.log(`\n /users/account - SUCCESS `)
             res.status(200).json({success:true,data:account})
         
         }).catch((err)=>{
+            console.log(`\n /users/account - FAILURE - ${err} `)
             res.status(500).json({success:false,message:`${err}`})
         })
 
     }).catch((err)=>{
-        console.log(`error: ${err}`)
+        console.log(`\n /users/account - FAILURE - ${err} `)
         res.status(500).json({success:false, message:`${err}`})
     })
 
