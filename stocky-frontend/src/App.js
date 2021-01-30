@@ -12,7 +12,7 @@ import {
 import VerticalNavBar from './components/VerticalNavBar'
 import HorizontalBar from './components/HorizontalBar'
 
-import OverviewPage from './pages/OverviewPage'
+import OverviewPage from './pages/OverviewPage/OverviewPage'
 import AboutPage from './pages/AboutPage'
 import StockPage from './pages/StockPage'
 import NotFoundPage from './pages/NotFoundPage'
