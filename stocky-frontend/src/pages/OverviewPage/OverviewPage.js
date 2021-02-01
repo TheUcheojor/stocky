@@ -66,9 +66,9 @@ const OverviewPage=({ email })=>{
                 <span className="container-title">Live Overview</span>
             </div>
 
-            <div className='container api-info'> 
+            <div className='container alpaca-form api-info'> 
                 <span className="container-title">Alpaca API Info</span>
-                <div className="alpaca-form" >
+                <div style={{paddingTop:"5px"}} >
 
                     <span className="aplaca-info-title" >Secret Key</span>
                     <input type="text" className="aplaca-info" id="secretKey" placeholder={secretKey}></input>

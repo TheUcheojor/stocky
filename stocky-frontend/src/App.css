@@ -49,12 +49,13 @@ body{
 #hor-bar{
   grid-area:hor-bar;
   background: rgba(86, 98, 112, 0.95);
-  color: rgba(86, 98, 112, 0.85);
+  /* color: rgba(86, 98, 112, 1); */
 
   display: flex;
   justify-content:space-between;
   align-items: center;
-  border-bottom: 5px solid #A593E0 ;
+  /* border-bottom: 5px solid #A593E0 ; */
+  border-bottom: 5px solid #fff ;
   /* rgba(86, 98, 112, 1) */
   /* box-shadow: 0 0 200px -20px rgba(57,55,73,.4); */
 
@@ -76,7 +77,8 @@ body{
 }
 
 .username{
-  color: #A593E0;
+  /* color: #A593E0; */
+  color:#fff;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   padding: 0 10px;
   font-weight: 900;
@@ -101,14 +103,13 @@ body{
   margin: 10px 0;
   text-decoration: none;
   padding: 10px 12px;
-  color: rgba(255,255,255,0.55);
+  font-weight:bold;
+  color: rgba(255,255,255,1);
   text-align: center;
 }
 
 #vert-bar  a:hover{
-  color: rgba(255,255,255,1);
   border-bottom: 2px solid white;
-  font-weight: bold;
 }
 
 /* Vertical Bar Design - ENDS */
@@ -220,7 +221,7 @@ body{
 
 .alpaca-form #saveApiSettings {
   width: 100%;
-  background-color: rgba(76, 175, 80, 1);
+  background-color: #000;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -253,6 +254,7 @@ body{
 /* Footer Design - STARTS */
 #footer{
   grid-area:footer;
-  background: #A593E0;
+  background:#fff;
+  /* background: #A593E0; */
 }
 /* Footer Design - ENDS */
