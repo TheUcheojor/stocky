@@ -150,6 +150,43 @@ apiRouter.get('/stocks',(req,res)=>{
 })
 
 
+apiRouter.post("/create-order", (req, res)=>{
+
+    const {email, symbol, side, qty, type,timeInForce}= req.body
+
+
+    User.findOne({email:email})
+    .then( user=>{
+
+        const userAlpaca = connectToAlpaca(user);
+
+        userAlpaca.createOrder({
+            symbol: symbol, // any valid ticker symbol
+            qty: qty, //number
+            side: side, //'buy' | 'sell',
+            type: type, //'market' | 'limit' | 'stop' | 'stop_limit' | 'trailing_stop',
+            time_in_force:timeInForce, //'day' | 'gtc' | 'opg' | 'ioc',
+        }).then((order)=>{
+            res.status(200).json({success:true, data:email})
+        }).catch(error=>{
+            console.log(`\n/api/create-order - FAILURE - ${error}`)
+            res.status(500).json({success:false, message:`Error creating ${type} ${side} order for ${symbol}`,error:`${error}`})
+        })
+
+
+
+    }).catch(error=>{
+        console.log(`\n/api/create-order - FAILURE - ${error}`)
+        res.status(500).json({success:false, message:`Cannot find user with email ${email}`,error:`${error}`})
+    })
+
+
+
+
+
+})
+
+
 
 
 
