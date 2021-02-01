@@ -78,7 +78,7 @@ settingsRouter.post("/set-strategy",(req,res)=>{
             userStrategy.runStrategy();
             
             console.log(`\n/settings/set-strategy - SUCCESS`)
-            console.log(`\tStrategy ${strategy} has been started for ${user.email}`)
+            console.log(`\nStrategy ${strategy} has been started for ${user.email}`)
             res.status(200).json( {success:true, data:email})
             
         })
@@ -113,8 +113,8 @@ settingsRouter.post("/add-stock", (req, res)=>{
            
            
             console.log(`\n/settings/add-stock - SUCCESS`) 
-            console.log(`\tStrategy ${user.settings.strategy} has been restarted for ${user.email}`)
-            console.log(`\t${stockSymbol} has been added the stock container associated to ${user.email}\n`) 
+            console.log(`\nStrategy ${user.settings.strategy} has been restarted for ${user.email}`)
+            console.log(`\n${stockSymbol} has been added the stock container associated to ${user.email}\n`) 
             res.status(200).json( {success:true, data:email})
         })
         .catch(error=>{
@@ -142,7 +142,7 @@ settingsRouter.delete("/remove-stock", (req, res)=>{
                 
             console.log(`\n/settings/remove-stock - SUCCESS`)
             console.log(`\tStrategy ${user.settings.strategy} has been restarted for ${user.email}`)
-            console.log(`\t${stockSymbol} has been removed the stock container associated to ${user.email}\n`)
+            console.log(`\n${stockSymbol} has been removed the stock container associated to ${user.email}\n`)
     
             res.status(200).json( {success:true, data:email})
         })

@@ -12,6 +12,9 @@ const STRATEGIES={
 class Strategy{
 
     constructor(user) {
+
+        this.userStrategy=user.settings.strategy
+        this.email=user.email
         this.strategyClass=this.getStrategyClass(user)
     }
 
@@ -20,11 +23,12 @@ class Strategy{
         if(this.strategyClass!=null){
             try{
                 this.strategyClass.run()
+                console.log(`\nInitiated strategy ${this.userStrategy} for ${this.email}`)
             }catch(error){
-                console.log("An error occurred: "+error)
+                console.log("\nAn error occurred: "+error)
             }
         }else{
-            console.log("No strategy to run ")
+            console.log("\nNo strategy to run ")
         } 
         
     }

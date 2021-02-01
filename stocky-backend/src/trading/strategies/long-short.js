@@ -8,7 +8,7 @@ const SideType = { BUY: 'buy', SELL: 'sell' }
 const PositionType = { LONG: 'long', SHORT: 'short' }
 
 class LongShort {
-  constructor ({ apiKey, secretKey, stocks, paper = true, bucketPct = 0.25 }) {
+  constructor (email,{ apiKey, secretKey, stocks, paper = true, bucketPct = 0.25 }) {
     this.alpaca = new Alpaca({
       keyId: apiKey,
       secretKey: secretKey,
@@ -16,6 +16,7 @@ class LongShort {
       usePolygon: USE_POLYGON
     })
 
+    this.email=email;
     this.keyId=apiKey;
     this.secretKey=secretKey;
     // let stocks = ['DOMO', 'TLRY', 'SQ', 'MRO', 'AAPL', 'GM', 'SNAP', 'SHOP', 'SPLK', 'BA', 'AMZN', 'SUI', 'SUN', 'TSLA', 'CGC', 'SPWR', 'NIO', 'CAT', 'MSFT', 'PANW', 'OKTA', 'TWTR', 'TM', 'RTN', 'ATVI', 'GS', 'BAC', 'MS', 'TWLO', 'QCOM']
@@ -33,6 +34,13 @@ class LongShort {
     this.shortAmount = 0
     this.timeToClose = null
     this.bucketPct = bucketPct
+  }
+
+  log(msg){
+    let date=new Date()
+    let time =` ${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
+
+    console.log(`\n${this.email} [${time}] - ${msg} `)
   }
 
   getStrategyName(){
@@ -63,10 +71,10 @@ class LongShort {
           type: 'market',
           time_in_force: 'day'
         })
-        log(`Market order of | ${quantity} ${stock} ${side} | completed.`)
+        this.log(`Market order of | ${quantity} ${stock} ${side} | completed.`)
         resolve(true)
       } catch (err) {
-        log(`Order of | ${quantity} ${stock} ${side} | did not go through.`)
+        this.log(`Order of | ${quantity} ${stock} ${side} | did not go through.`)
         resolve(false)
       }
     })
@@ -88,7 +96,7 @@ class LongShort {
                 incomplete.push(stock)
               }
             } catch (err) {
-              log(err.error)
+              this.log(err.error)
             }
           }
           resolve()
@@ -110,11 +118,11 @@ class LongShort {
             let openTime = new Date(clock.next_open.substring(0, clock.next_close.length - 6))
             let currTime = new Date(clock.timestamp.substring(0, clock.timestamp.length - 6))
             this.timeToClose = Math.floor((openTime - currTime) / 1000 / 60)
-            log(`${this.timeToClose} minutes til next market open.`)
+            this.log(`${this.timeToClose} minutes til next market open.`)
             setTimeout(check, MINUTE)
           }
         } catch (err) {
-          log(err.error)
+          this.log(err.error)
         }
       }
       check()
@@ -129,7 +137,7 @@ class LongShort {
         direction: 'desc'
       })
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
 
     return Promise.all(orders.map(order => {
@@ -137,7 +145,7 @@ class LongShort {
         try {
           await this.alpaca.cancelOrder(order.id)
         } catch (err) {
-          log(err.error)
+          this.log(err.error)
         }
         resolve()
       })
@@ -149,10 +157,10 @@ class LongShort {
     await this.cancelExistingOrders()
 
     // Wait for market to open.
-    log('Waiting for market to open...')
+    this.log('Waiting for market to open...')
 
     await this.awaitMarketOpen()
-    log('Market opened.')
+    this.log('Market opened.')
 
     // Rebalance the portfolio every minute, making necessary trades.
     var spin = setInterval(async () => {
@@ -163,14 +171,14 @@ class LongShort {
         let currTime = new Date(clock.timestamp.substring(0, clock.timestamp.length - 6))
         this.timeToClose = Math.abs(closingTime - currTime)
       } catch (err) {
-        log(err.error)
+        this.log(err.error)
       }
 
       const INTERVAL = 15 // minutes
 
       if (this.timeToClose < (MINUTE * INTERVAL)) {
         // Close all positions when 15 minutes til market close.
-        log('Market closing soon. Closing positions.')
+        this.log('Market closing soon. Closing positions.')
 
         try {
           let positions = await this.alpaca.getPositions()
@@ -181,11 +189,11 @@ class LongShort {
             side: position.side === PositionType.LONG ? SideType.SELL : SideType.BUY
           })))
         } catch (err) {
-          log(err.error)
+          this.log(err.error)
         }
 
         clearInterval(spin)
-        log(`Sleeping until market close (${INTERVAL} minutes).`)
+        this.log(`Sleeping until market close (${INTERVAL} minutes).`)
 
         setTimeout(() => {
           // Run script again after market close for next trading day.
@@ -207,8 +215,8 @@ class LongShort {
     // Clear existing orders again.
     await this.cancelExistingOrders()
 
-    log(`We are taking a long position in: ${this.long.toString()}`)
-    log(`We are taking a short position in: ${this.short.toString()}`)
+    this.log(`We are taking a long position in: ${this.long.toString()}`)
+    this.log(`We are taking a short position in: ${this.short.toString()}`)
 
     // Remove positions that are no longer in the short or long list, and make a list of positions that do not need to change.
     // Adjust position quantities if needed.
@@ -216,7 +224,7 @@ class LongShort {
     try {
       positions = await this.alpaca.getPositions()
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
 
     let executed = { long: [], short: [] }
@@ -240,7 +248,7 @@ class LongShort {
               })
               resolve()
             } catch (err) {
-              log(err.error)
+              this.log(err.error)
             }
           } else if (position.side === PositionType.LONG) { // Position in short list.
             try {
@@ -252,7 +260,7 @@ class LongShort {
               })
               resolve()
             } catch (err) {
-              log(err.error)
+              this.log(err.error)
             }
           } else {
             // Position is not where we want it.
@@ -268,7 +276,7 @@ class LongShort {
                   side: diff > 0 ? SideType.BUY : SideType.SELL
                 })
               } catch (err) {
-                log(err.error)
+                this.log(err.error)
               }
             }
             executed.short.push(symbol)
@@ -281,7 +289,7 @@ class LongShort {
             await this.submitOrder({ quantity, stock: symbol, side: SideType.BUY })
             resolve()
           } catch (err) {
-            log(err.error)
+            this.log(err.error)
           }
         } else {
           // Position is not where we want it.
@@ -294,7 +302,7 @@ class LongShort {
             try {
               await this.submitOrder({ quantity: Math.abs(diff), stock: symbol, side })
             } catch (err) {
-              log(err.error)
+              this.log(err.error)
             }
           }
           executed.long.push(symbol)
@@ -343,7 +351,7 @@ class LongShort {
         }
       }
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
 
     try {
@@ -382,7 +390,7 @@ class LongShort {
         resolve()
       })
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
   }
 
@@ -406,7 +414,7 @@ class LongShort {
       this.shortAmount = 0.30 * equity
       this.longAmount = Number(this.shortAmount) + Number(equity)
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
 
     try {
@@ -414,7 +422,7 @@ class LongShort {
       let longTotal = longPrices.reduce((a, b) => a + b, 0)
       this.qLong = Math.floor(this.longAmount / longTotal)
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
 
     try {
@@ -422,7 +430,7 @@ class LongShort {
       let shortTotal = shortPrices.reduce((a, b) => a + b, 0)
       this.qShort = Math.floor(this.shortAmount / shortTotal)
     } catch (err) {
-      log(err.error)
+      this.log(err.error)
     }
   }
 
@@ -440,7 +448,7 @@ class LongShort {
             resolve(resp[stock][0].closePrice);
           }
         } catch (err) {
-          log(err.message)
+          this.log(err.message)
         }
       })
     }))
@@ -471,7 +479,7 @@ class LongShort {
             stock.pc = (last_close - first_open) / first_open;
           }
         } catch (err) {
-          log(err.message)
+          this.log(err.message)
         }
         resolve()
       })
@@ -488,14 +496,11 @@ class LongShort {
   }
 }
 
-function log (text) {
-  console.log(text)
-}
 
 
 LongShort.instances=[];
 LongShort.create=function(user){
-    let logShortClass=new LongShort(user.alpaca);
+    let logShortClass=new LongShort(user.email,user.alpaca);
     LongShort.instances.push(logShortClass);
     return logShortClass;
 }
