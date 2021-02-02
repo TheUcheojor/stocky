@@ -12,8 +12,8 @@ const userSchema=mongoose.Schema({
         type:String
     },
     alpaca:{
-        secretKey:String,
-        apiKey:String,
+        secretKey:String,//Should be unique to avoid conflicting strategies 
+        apiKey:String,//Should be unique to avoid conflicting strategies 
         stocks:[{
             type:String
         }]   
