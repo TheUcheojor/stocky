@@ -11,14 +11,14 @@ const setAccountInformation= async ( email, {setEquity,setBuyingPower,setDailyEa
     const {success,data}=await res.json()
 
     if(success){
-        console.log(`GET /users/account - Success - data: ${JSON.stringify(data) } `)
-        setEquity(data.equity)
-        setBuyingPower(data.buying_power)
-        setDailyEarning(data.equity - data.last_equity)
+        console.log(`GET /users/account - Success`)
+        setEquity(parseFloat(data.equity))
+        setBuyingPower(parseFloat(data.buying_power))
+        setDailyEarning( parseFloat(data.equity) - parseFloat(data.last_equity))
         setSecretKey(data.alpaca.secretKey)
         setApiKey(data.alpaca.apiKey)
     }else{
-        console.log(`GET /users/account - Failure - data: ${JSON.stringify(data)} `)
+        console.log(`GET /users/account - Failure`)
 
         setEquity('0')
         setBuyingPower('0')
