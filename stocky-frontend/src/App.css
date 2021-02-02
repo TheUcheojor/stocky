@@ -183,7 +183,7 @@ body{
   top: 50%;
   right: 50%;
   font-size: 22px;
-  transform: translate(50%,-90%);
+  transform: translate(50%,-50%);
 
 }
 .live-overview{
