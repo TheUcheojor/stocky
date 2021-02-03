@@ -8,9 +8,15 @@ const AlpacaForm= ({email,apiKey,secretKey,setApiKey,setSecretKey})=>{
 
         if(apiKey=="" || secretKey==""){
             document.getElementsByClassName("alpaca-form")[0].classList.add("glow")
+            document.getElementsByClassName("alpaca-form")[0].title="Please enter your Alpaca keys."
+
         }else{
             document.getElementsByClassName("alpaca-form")[0].classList.remove("glow")
+            document.getElementsByClassName("alpaca-form")[0].title=""
+
         }
+
+
     },[apiKey,secretKey])
     
     
@@ -39,6 +45,7 @@ const AlpacaForm= ({email,apiKey,secretKey,setApiKey,setSecretKey})=>{
                     </button>
 
             </div>
+
         </div>
     )
 
