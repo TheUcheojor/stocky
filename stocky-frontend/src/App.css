@@ -321,6 +321,15 @@ body{
 }
 
 
+.active{
+  display: block;
+}
+
+.disabled{
+  display: none;
+}
+
+
 
 /* Content Design - ENDS */
 
