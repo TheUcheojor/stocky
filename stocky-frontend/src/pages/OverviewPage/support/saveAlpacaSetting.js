@@ -13,7 +13,7 @@ const saveAplacaSettings= async ({email, apiKey, secretKey, setApiKey, setSecret
         body:JSON.stringify({"email":email, "apiKey":apiKey, "secretKey":secretKey})
     });
 
-    const {success,data}=await res.json()
+    const {success,data,message}=await res.json()
 
     if(success){
         NotificationManager.success("Aplaca Keys", "Your Aplaca keys have been saved")
@@ -22,7 +22,7 @@ const saveAplacaSettings= async ({email, apiKey, secretKey, setApiKey, setSecret
         setSecretKey(secretKey)
 
     }else{
-        NotificationManager.error("Aplaca Keys", data.message)
+        NotificationManager.error("Aplaca Keys", message)
         console.log(`GET /users/account - Failure - data: ${JSON.stringify(data)} `)
     }
 
