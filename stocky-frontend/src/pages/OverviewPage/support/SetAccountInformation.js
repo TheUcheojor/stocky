@@ -21,7 +21,7 @@ const setAccountInformation= async ( email, {setEquity,setBuyingPower,setDailyEa
         setSecretKey(data.alpaca.secretKey)
         setApiKey(data.alpaca.apiKey)
     }else{
-        NotificationManager.error("Account Information", `${message}`)
+        // NotificationManager.error("Account Information", `${message}`)
         setEquity(0)
         setBuyingPower(0)
         setDailyEarning(0)
