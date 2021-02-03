@@ -82,7 +82,7 @@ const ManualOrder= ({email})=>{
             
             <div className="quantity">
                 <div className="info-title"> Quantity</div>
-                <input id="order-quantity"  className=" options" placeholder="1" type="number" /> 
+                <input id="order-quantity"  className=" options" placeholder="1" min="1" type="number" /> 
             </div>
 
             <div className="create-order">
