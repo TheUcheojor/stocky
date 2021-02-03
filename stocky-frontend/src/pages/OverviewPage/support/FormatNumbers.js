@@ -21,7 +21,7 @@ const formatNumber=(num)=>{
     let formattedIntegers=""
     for(var i =0; i<rawIntegers.length; i++){
         
-        if( (i+1)%3==0 ){
+        if( (i+1)%3 ===0 ){
             formattedIntegers+=rawIntegers[i]+", "
         }else{
             formattedIntegers+=rawIntegers[i]
@@ -29,7 +29,7 @@ const formatNumber=(num)=>{
 
     }
 
-    formattedIntegers=(formattedIntegers[formattedIntegers.length-2]==',')?  
+    formattedIntegers=(formattedIntegers[formattedIntegers.length-2]===',')?  
                             formattedIntegers.substring(0, formattedIntegers.length-2):formattedIntegers 
 
 
