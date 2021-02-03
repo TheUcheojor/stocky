@@ -18,6 +18,9 @@ import StockPage from './pages/StockPage'
 import NotFoundPage from './pages/NotFoundPage'
 import SettingsPage from './pages/SettingsPage'
 
+import 'react-notifications/lib/notifications.css';
+
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 function App() {
@@ -39,6 +42,7 @@ function App() {
           
           <div id='footer'>Paul Okenne - paulokenne@cmail.carleton.ca</div>
 
+          <NotificationContainer/>
       </Router>
        
     </>
