@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect} from 'react'
 import setAccountInformation from './support/SetAccountInformation'
 import formatNumber from './support/FormatNumbers'
 
@@ -58,14 +58,15 @@ const OverviewPage=({ email })=>{
             <DailyProfit dailyEarning={formatNumber(dailyEarning)} />
             
 
-            <LiveOverview />
+            <LiveOverview email={email} />
             
             <AlpacaForm email={email} secretKey={secretKey}  apiKey={apiKey} setApiKey={setApiKey} setSecretKey={setSecretKey} />
             
-            <OrderHistory />
+            <OrderHistory  email={email} />
             
 
-            <ManualOrder />
+            <ManualOrder email={email} />
+
         
         </div>
     )
