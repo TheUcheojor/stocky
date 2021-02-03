@@ -40,7 +40,7 @@ apiRouter.get('/get-order-history', (req,res)=>{
                         {
                             symbol: activity.symbol,
                             type: activity.type,
-                            quantity:activity.quantity,
+                            quantity:activity.qty,
                             price:activity.price,
                             transaction_time:activity.transaction_time,
                             order_type:order.type,
