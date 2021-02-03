@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OrderHistory=({})=>(
+const OrderHistory=({email})=>(
 
     <div className='container order-history'> 
 
