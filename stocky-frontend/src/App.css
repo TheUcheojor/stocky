@@ -120,6 +120,7 @@ body{
   grid-area:content;
   background:rgba(86, 98, 112, 0.75);
 
+  padding: 5px 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 120px 1fr 1fr;
@@ -166,6 +167,10 @@ body{
   color:#566270;
 }
 
+.glow{
+  border-color: #FF0000;
+  box-shadow: 0 0 10px #FF0000;
+}
 
 /* Account Details */
 .account-details{
@@ -203,7 +208,9 @@ body{
   margin: 10px 5px;
 }
 
-.alpaca-form span.aplaca-info-title{
+
+
+.alpaca-form span.aplaca-info-title, .manual-order .option-title{
   font-size: 12px ;
 }
 
@@ -219,9 +226,11 @@ body{
   overflow: scroll;
 }
 
-.alpaca-form #saveApiSettings {
+
+
+.alpaca-form #saveApiSettings, .manual-order #create-order-button {
   width: 100%;
-  background-color: #000;
+  background-color: rgba(0,0,0,1);
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -230,8 +239,13 @@ body{
   cursor: pointer;
 }
 
+
 .alpaca-form #saveApiSettings:hover{
-  background-color: rgba(76, 175, 80, 0.8);
+  background-color: rgba(0,0,0,0.7);
+
+}
+ .manual-order #create-order-button:hover{
+  background-color: rgba(0,0,0,0.7);
 }
 
 /* Order History */
@@ -241,10 +255,70 @@ body{
 
 /* Manual Order */
 .manual-order{
+  display: grid;
+  /* width: 88%; */
+  /* height: 85%; */
   grid-area: manual-order;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  text-align: left;
+  margin: 5px 5px;
+  grid-template-columns: 50% ;
+  grid-template-areas: 
+  'container-title container-title'
+  'operation order-type'
+  'stock-symbols time-in-force'
+  'quantity quantity' 
+  'create-order create-order' ;
+
+  grid-gap:10px;
+  
 }
 
+.manual-order .options{
+  width: 100%;
+  padding: 5px 5px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
+.manual-order .info-title{
+  font-size: 11px;
+}
+
+.manual-order .container-title{
+  grid-area: container-title;
+  font-size: 12px;
+  font-weight: 700;
+
+}
+
+.manual-order .operation{
+  grid-area: operation;
+}
+
+.manual-order .order-type{
+  grid-area: order-type;
+}
+
+.manual-order .stock-symbols{
+  grid-area: stock-symbols;
+}
+
+.manual-order .time-in-force{
+  grid-area: time-in-force;
+}
+
+.manual-order .quantity{
+  grid-area: quantity;
+}
+
+.manual-order .create-order{
+  grid-area: create-order;
+}
 
 
 
