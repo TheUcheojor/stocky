@@ -181,6 +181,7 @@ apiRouter.post("/create-order", (req, res)=>{
             type: type, //'market' | 'limit' | 'stop' | 'stop_limit' | 'trailing_stop',
             time_in_force:timeInForce, //'day' | 'gtc' | 'opg' | 'ioc',
         }).then((order)=>{
+            console.log(`\n/api/create-order - SUCCESS - ${email} - ${symbol}`)
             res.status(200).json({success:true, data:email})
         }).catch(error=>{
             console.log(`\n/api/create-order - FAILURE - ${error}`)
