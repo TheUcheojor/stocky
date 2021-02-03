@@ -149,6 +149,20 @@ apiRouter.get('/stocks',(req,res)=>{
     
 })
 
+apiRouter.get('/all-stock-profiles',(req,res)=>{
+
+    const STOCK_PROFILE_API="https://TheUcheojor.github.io/stocky-reference-data/stock-profiles.json"
+    
+    axios.get(STOCK_PROFILE_API)
+    .then(axiosResponse=>{
+        res.status(200).json({success:true, data: axiosResponse.data })
+    }).catch(err=>{
+        console.log(`\n/api/stocks - FAILURE - ${err}`)
+        res.status(500).json({success:false, message:`Server Error. Cannot access stock-profiles`,error:`${err}`})
+    })
+    
+})
+
 
 apiRouter.post("/create-order", (req, res)=>{
 
