@@ -81,7 +81,7 @@ class MeanReversion {
     this.log("Market opened.");
 
     for (var i=0;i<this.stocks.length;i++){
-        runStategyOnStock(this.stocks[i])
+        this.runStategyOnStock(this.stocks[i])
     }
     
 
