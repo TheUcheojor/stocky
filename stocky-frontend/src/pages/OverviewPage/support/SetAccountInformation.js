@@ -1,4 +1,7 @@
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
+
 const setAccountInformation= async ( email, {setEquity,setBuyingPower,setDailyEarning,setSecretKey,setApiKey})=>{
 
     const res=await fetch(`/users/account?email=${encodeURIComponent(email)}`,{
@@ -8,7 +11,7 @@ const setAccountInformation= async ( email, {setEquity,setBuyingPower,setDailyEa
         }
     });
     
-    const {success,data}=await res.json()
+    const {success,data,message}=await res.json()
 
     if(success){
         console.log(`GET /users/account - Success`)
@@ -18,10 +21,10 @@ const setAccountInformation= async ( email, {setEquity,setBuyingPower,setDailyEa
         setSecretKey(data.alpaca.secretKey)
         setApiKey(data.alpaca.apiKey)
     }else{
-        console.log(`GET /users/account - Failure`)
-
-        setEquity('0')
-        setBuyingPower('0')
+        NotificationManager.error("Account Information", `${message}`)
+        setEquity(0)
+        setBuyingPower(0)
+        setDailyEarning(0)
     }
 
 }

@@ -1,4 +1,5 @@
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 const saveAplacaSettings= async ({email, apiKey, secretKey, setApiKey, setSecretKey})=>{
@@ -15,11 +16,13 @@ const saveAplacaSettings= async ({email, apiKey, secretKey, setApiKey, setSecret
     const {success,data}=await res.json()
 
     if(success){
+        NotificationManager.success("Aplaca Keys", "Your Aplaca keys have been saved")
         console.log(`GET /users/account - Success } `)
         setApiKey(apiKey)
         setSecretKey(secretKey)
 
     }else{
+        NotificationManager.error("Aplaca Keys", data.message)
         console.log(`GET /users/account - Failure - data: ${JSON.stringify(data)} `)
     }
 
