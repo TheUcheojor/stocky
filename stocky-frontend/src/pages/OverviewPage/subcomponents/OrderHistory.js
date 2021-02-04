@@ -24,7 +24,7 @@ const OrderHistory=({email,equity})=>{
 
             <span className="container-title" >Order History</span>
             
-            <div class="table-container" >
+            <div className="table-container" >
 
                 <table id="order-history-table" style={{"height":"20px"}} >
 
@@ -39,8 +39,8 @@ const OrderHistory=({email,equity})=>{
 
 
                         {
-                            orders.map(order=>(
-                                <tr>
+                            orders.map((order,i)=>(
+                                <tr key={i}> 
                                     <td>{order.symbol}</td>
                                     <td>
                                         {order.order_type.replace(/^\w/, (c) => c.toUpperCase())} {order.type.toUpperCase()}
