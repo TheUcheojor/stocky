@@ -62,7 +62,7 @@ const OverviewPage=({ email })=>{
             
             <AlpacaForm email={email} secretKey={secretKey}  apiKey={apiKey} setApiKey={setApiKey} setSecretKey={setSecretKey} />
             
-            <OrderHistory  email={email} />
+            <OrderHistory  email={email} equity={equity} />
             
 
             <ManualOrder email={email} />
