@@ -151,7 +151,7 @@ body{
   left: 0px;
   text-align: left;
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -251,6 +251,43 @@ body{
 /* Order History */
 .order-history{
   grid-area: order-history ;
+}
+
+.table-container{
+  width:100%;
+  margin: 5px 0;
+  max-height:87%;
+  overflow:auto;
+}
+
+#order-history-table {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+
+#order-history-table td, #order-history-table th {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  text-align: left;
+}
+
+#order-history-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#order-history-table tr:hover {background-color: #ddd;}
+
+#order-history-table th {
+  position: sticky;
+  top: 0;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #000;
+  color: white;
 }
 
 /* Manual Order */
