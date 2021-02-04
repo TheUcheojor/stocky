@@ -1,4 +1,4 @@
-# System-Overflow
+# Stocky
 
 Stocky is a simple automated stock-trading platform. 
 
