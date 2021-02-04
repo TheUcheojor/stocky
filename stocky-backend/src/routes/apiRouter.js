@@ -26,27 +26,30 @@ apiRouter.get('/get-order-history', (req,res)=>{
         // { activityTypes, until, after, direction, date, pageSize }: 
         // { activityTypes: any; until: any; after: any; direction: any; date: any; pageSize: any; }
        
-        alpaca.getAccountActivities({activityTypes:["FILL"], pageSize: MAX_ACTIVITIES})
+        alpaca.getAccountActivities({activityTypes:["FILL"], pageSize: MAX_ACTIVITIES, direction:'desc'})
         .then( (activities)=>{
             
             let formattedActivities=[];
 
             async.each(activities, function(activity, callback){
 
-                alpaca.getOrder(activity["order_id"])
+    
+                alpaca.getOrder(activity.order_id)
                 .then((order)=>{
-                    
                     formattedActivities.push(
                         {
+                            order_id:activity.order_id, 
                             symbol: activity.symbol,
                             type: activity.type,
                             quantity:activity.qty,
                             price:activity.price,
-                            transaction_time:activity.transaction_time,
+                            transaction_time:activity.transaction_time.split(".")[0],
                             order_type:order.type,
                             status: order.status
                         }
                     )
+
+
 
                     callback()
 
@@ -57,8 +60,19 @@ apiRouter.get('/get-order-history', (req,res)=>{
 
 
             }  ).then( ()=>{
+                let orderedIds=activities.map(activity=>activity.order_id)
+                
+                let orderedActivities=[]
+                orderedIds.forEach( orderId=>{
+
+                    let targetActivity=formattedActivities.find(activity=>activity.order_id==orderId)
+                    orderedActivities.push(targetActivity)
+
+                })
+
+
                 console.log(`\n/get-order-history - SUCCESS`)
-                res.status(200).json({success:true, data:formattedActivities})
+                res.status(200).json({success:true, data:orderedActivities})
 
             }).catch(err=>{
                 console.log(`\n/get-order-history - FAILURE - error: ${err}`)
