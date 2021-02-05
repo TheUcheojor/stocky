@@ -215,7 +215,37 @@ apiRouter.post("/create-order", (req, res)=>{
 
 })
 
+apiRouter.get('/portfolio-history',(req,res)=>{
 
+    const {email, period}=req.query
+
+    //Period Options are 1D, 1M, 1A
+
+    console.log(period)
+    User.findOne({email:email})
+    .then((user)=>{
+
+        const userAlpaca=connectToAlpaca(user)
+
+        userAlpaca.getPortfolioHistory({period:period})
+        .then(portfolioHistory=>{
+            console.log(`/api/portfolio-history - SUCCESS `)
+            res.status(200).json({success:true, data:portfolioHistory})
+
+        }).catch(error=>{
+            console.log(`/api/portfolio-history - FAILURE -${error}`)
+            res.status(500).json({success:false, messeage:`Cannot get the portfolio history of ${email}`, error:`${error}`})
+        })
+
+
+
+    }).catch( error=>{
+        console.log(`/api/portfolio-history - FAILURE -${error}`)
+        res.status(500).json({success:false, message:`Cannout find user with email ${email}`, error:`${error}`})
+    })
+
+
+})
 
 
 
