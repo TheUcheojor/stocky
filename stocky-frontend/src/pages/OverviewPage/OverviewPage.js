@@ -58,7 +58,7 @@ const OverviewPage=({ email })=>{
             <DailyProfit dailyEarning={formatNumber(dailyEarning)} />
             
 
-            <LiveOverview email={email} />
+            <LiveOverview email={email} equity={equity} />
             
             <AlpacaForm email={email} secretKey={secretKey}  apiKey={apiKey} setApiKey={setApiKey} setSecretKey={setSecretKey} />
             
