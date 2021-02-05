@@ -221,7 +221,6 @@ apiRouter.get('/portfolio-history',(req,res)=>{
 
     //Period Options are 1D, 1M, 1A
 
-    console.log(period)
     User.findOne({email:email})
     .then((user)=>{
 
