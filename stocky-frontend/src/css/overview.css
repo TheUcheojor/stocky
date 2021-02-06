@@ -1,0 +1,256 @@
+.content.overview{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 120px 1fr 1fr;
+  
+    grid-template-areas:
+    "account-details .  daily-profit"
+    "live-overview live-overview api-info"
+    "order-history order-history manual-order"
+    ;
+  
+    grid-gap:15px;
+  }
+  
+
+  
+  .glow{
+    border-color: #FF0000;
+    box-shadow: 0 0 10px #FF0000;
+  }
+  
+  /* Account Details */
+  .account-details{
+    grid-area: account-details ;
+  }
+  
+  /* Daily Profit */
+  
+  .daily-profit{
+    grid-area: daily-profit ;
+  }
+  
+  .container-subtitles.daily-profit{
+    position: relative;
+    top: 50%;
+    right: 50%;
+    font-size: 22px;
+    transform: translate(50%,-50%);
+  
+  }
+  
+  /* Live Overview */
+  .live-overview{
+    grid-area: live-overview ;
+  }
+  
+  .overview-options{
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+  }
+  
+  .overview-option{
+    background-color: #000;
+    color: #fff;
+    padding: 5px 15px;
+    margin-top: 5px;
+    /* margin-right: 5px; */
+  
+  }
+  
+  .overview-option:hover {
+    background-color: rgba(0,0,0,0.7);
+    cursor: default;
+  }
+  
+  .selected{
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  .overview-graphs{
+    position: relative;
+    /* background: black; */
+    margin: 5px 0;
+    width:100%;
+    height: 75%;
+  }
+  
+  .overview-graph{
+    position: absolute;
+    display: block;
+    /* top:5%; */
+    width:100%;
+    height: 100%;
+    left: 0;
+  }
+  
+  
+  .hide{
+    display: none!important;
+  }
+  
+  /*  Aplaca Information */
+  .api-info{
+    grid-area: api-info ;
+  }
+  
+  .alpaca-form{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 10px 20px;
+    text-align: left;
+    margin: 10px 5px;
+  }
+  
+  
+  
+  .alpaca-form span.aplaca-info-title, .manual-order .option-title{
+    font-size: 12px ;
+  }
+  
+  .alpaca-form input.aplaca-info {
+    font-size: 12px;
+    width: 100%;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: scroll;
+  }
+  
+  
+  
+  .alpaca-form #saveApiSettings, .manual-order #create-order-button {
+    width: 100%;
+    background-color: rgba(0,0,0,1);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  
+  .alpaca-form #saveApiSettings:hover{
+    background-color: rgba(0,0,0,0.7);
+  
+  }
+   .manual-order #create-order-button:hover{
+    background-color: rgba(0,0,0,0.7);
+  }
+  
+  /* Order History */
+  .order-history{
+    grid-area: order-history ;
+  }
+  
+  .table-container{
+    width:100%;
+    margin: 5px 0;
+    max-height:87%;
+    overflow:auto;
+  }
+  
+  #order-history-table {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  
+  
+  #order-history-table td, #order-history-table th {
+    /* border: 1px solid #ddd; */
+    padding: 8px;
+    text-align: left;
+  }
+  
+  #order-history-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #order-history-table tr:hover {background-color: #ddd;}
+  
+  #order-history-table th {
+    position: sticky;
+    top: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #000;
+    color: white;
+  }
+  
+  /* Manual Order */
+  .manual-order{
+    display: grid;
+    /* width: 88%; */
+    /* height: 85%; */
+    grid-area: manual-order;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 10px 20px;
+    text-align: left;
+    margin: 5px 5px;
+    grid-template-columns: 50% ;
+    grid-template-areas: 
+    'container-title container-title'
+    'operation order-type'
+    'stock-symbols time-in-force'
+    'quantity quantity' 
+    'create-order create-order' ;
+  
+    grid-gap:10px;
+    
+  }
+  
+  .manual-order .options{
+    width: 100%;
+    padding: 5px 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .manual-order .info-title{
+    font-size: 11px;
+  }
+  
+  .manual-order .container-title{
+    grid-area: container-title;
+    font-size: 12px;
+    font-weight: 700;
+  
+  }
+  
+  .manual-order .operation{
+    grid-area: operation;
+  }
+  
+  .manual-order .order-type{
+    grid-area: order-type;
+  }
+  
+  .manual-order .stock-symbols{
+    grid-area: stock-symbols;
+  }
+  
+  .manual-order .time-in-force{
+    grid-area: time-in-force;
+  }
+  
+  .manual-order .quantity{
+    grid-area: quantity;
+  }
+  
+  .manual-order .create-order{
+    grid-area: create-order;
+  }
+  
