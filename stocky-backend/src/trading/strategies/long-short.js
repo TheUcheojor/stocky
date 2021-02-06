@@ -16,6 +16,8 @@ class LongShort {
       usePolygon: USE_POLYGON
     })
 
+    this.haltStrategy=false;
+
     this.email=email;
     this.keyId=apiKey;
     this.secretKey=secretKey;
@@ -36,11 +38,17 @@ class LongShort {
     this.bucketPct = bucketPct
   }
 
+  setHaltStrategy(status){
+    this.haltStrategy=status
+    this.log("STOP LONG_SHORT STRATEGY")
+
+  }
+
   log(msg){
     let date=new Date()
-    let time =` ${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
+    let time =`${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
 
-    console.log(`\n${this.email} [${time}] - ${msg} `)
+    console.log(`\n${this.email} [${this.getStrategyName()}] [${time}] - ${msg}`)
   }
 
   getStrategyName(){
@@ -110,6 +118,10 @@ class LongShort {
   async awaitMarketOpen () {
     return new Promise(resolve => {
       const check = async () => {
+
+        if(this.haltStrategy) clearInterval(spin);
+        
+
         try {
           let clock = await this.alpaca.getClock()
           if (clock.is_open) {
@@ -164,6 +176,9 @@ class LongShort {
 
     // Rebalance the portfolio every minute, making necessary trades.
     var spin = setInterval(async () => {
+
+      if(this.haltStrategy) clearInterval(spin);
+
       // Figure out when the market will close so we can prepare to sell beforehand.
       try {
         let clock = await this.alpaca.getClock()
@@ -210,10 +225,15 @@ class LongShort {
 
   // Rebalance our position after an update.
   async rebalance () {
+
     await this.rerank()
 
     // Clear existing orders again.
     await this.cancelExistingOrders()
+
+
+    if(this.haltStrategy)return;
+    
 
     this.log(`We are taking a long position in: ${this.long.toString()}`)
     this.log(`We are taking a short position in: ${this.short.toString()}`)
@@ -516,6 +536,7 @@ LongShort.remove=function(user){
       instanceAuthentication.secretKey==userAuthentication.secretKey){
 
         console.log(`\nRemoving currently-running strategy (${longShortInstance.getStrategyName()}) of ${user.email}`)
+        longShortInstance.setHaltStrategy(true)
     }
 
     return instanceAuthentication.apiKey!=userAuthentication.apiKey &&
