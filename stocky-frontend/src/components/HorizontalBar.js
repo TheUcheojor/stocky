@@ -30,9 +30,9 @@ const HorizontalBar=()=>{
             <ul className="search-results">
                 {results.map((stockProfile,i)=>(
                 
-                <a className="stock-link" href={`/stocks/${stockProfile.symbol}`} >
+                <a className="stock-link" key={i} href={`/stocks/${stockProfile.symbol}`} >
 
-                    <li style={{position:"relative"}} key={i}> 
+                    <li style={{position:"relative"}} > 
                             <span className="result-item-name"> {stockProfile.name}</span> 
                             <span className="result-item-symbol"> {stockProfile.symbol}</span> 
                           
