@@ -51,7 +51,7 @@ const OverviewPage=({ email })=>{
 
 
     return (
-        <div id='content'> 
+        <div className='content overview'> 
 
             <AccountDetails  equity={formatNumber(equity)} buyingPower={formatNumber(buyingPower)}/>
 
