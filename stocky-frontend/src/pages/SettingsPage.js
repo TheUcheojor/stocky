@@ -41,9 +41,9 @@ const SettingsPage=()=>{
 
                 <span className="setting-container-item" > Select Stocks To Trade</span>
                 <select type="text" className="setting-container-item-select" id="select-stock-collection"  multiple='multiple'
-                    defaultValue={["APPL","SNAP","NFMT" ]}
-                >
-                    <option value="APPL">APPL - Apple</option>
+                    defaultValue={["APPL","SNAP","NFMT" ]} >
+                        
+                    <option value="APPL"> APPL - Apple</option>
                     <option value="SNAP" >SNAP - Snap</option>
                     <option value="GOOG" >GOOG - Google</option>
                     <option value="TSLA" >TSLA - Tesla</option>
