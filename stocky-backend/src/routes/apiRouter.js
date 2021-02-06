@@ -123,8 +123,8 @@ apiRouter.get('/search',(req,res)=>{
 
               return  StringSimilarity.compareTwoStrings(stockProfile.symbol.toLowerCase(), query.toLowerCase() ) > SIMILARITY_CONSTANT
             || StringSimilarity.compareTwoStrings(stockProfile.name.toLowerCase(), query.toLowerCase() ) > SIMILARITY_CONSTANT
-        }
-            )
+            }
+        )
         console.log(`\n/api/search - SUCCESS`)
         console.log(`\n${query} : ${desiredStockProfiles}`)
         res.status(200).json({success:true, data: desiredStockProfiles })
