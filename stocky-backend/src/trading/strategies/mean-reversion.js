@@ -4,6 +4,7 @@ import keys from '../../config/setup'
 
 
 const PAPER=true
+const MINUTE = 60000
 
 class MeanReversion {
 
@@ -17,6 +18,8 @@ class MeanReversion {
       secretKey: secretKey,
       paper: PAPER
     });
+
+    this.haltStrategy=false
 
     this.email=email;
 
@@ -41,12 +44,17 @@ class MeanReversion {
     // this.stock = "AAPL";
         
   }
+
+  setHaltStrategy(status){
+    this.haltStrategy=status
+    this.log("STOP MEAN_REVERSION STRATEGY")
+  }
   
   log(msg){
     let date=new Date()
     let time =` ${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
 
-    console.log(`\n${this.email} [${time}] - ${msg} `)
+    console.log(`\n${this.email} [${this.getStrategyName()}] [${time}] - ${msg} `)
   }
 
   getStrategyName(){
@@ -117,6 +125,9 @@ class MeanReversion {
     // Rebalance our portfolio every minute based off running average data.
     var spin = setInterval(async () => {
 
+        if(this.haltStrategy) clearInterval(spin);
+        
+
     // Clear the last order so that we only have 1 hanging order.
         if(this.lastOrders[stock] != null) await this.alpaca.cancelOrder(this.lastOrders[stock].id).catch((err) => {this.log(err.error);});
   
@@ -132,9 +143,10 @@ class MeanReversion {
 
         }).catch((err) => {this.log(err.error);});
         
+        const INTERVAL = 15 // minutes
         timeToClose = closingTime - currTime;
   
-        if(timeToClose < (60000 * 15)) {
+        if(timeToClose < (MINUTE * INTERVAL)) {
 
           // Close all positions when 15 minutes til market close.
           this.log(`Market closing soon.  Closing positions for ${stock}`);
@@ -149,23 +161,23 @@ class MeanReversion {
 
           clearInterval(spin);
 
-        //   this.log("Sleeping until market close (15 minutes).");
+          this.log("Sleeping until market close (15 minutes).");
 
 
-        //   setTimeout( () => {
-        //     // Run script again after market close for next trading day.
+          setTimeout( () => {
+            // Run script again after market close for next trading day.
 
-        //     this.run();
+            this.run();
 
             
-        //   }, 60000*15);
+          }, MINUTE*INTERVAL);
 
         }
         else {
           // Rebalance the portfolio.
           await this.rebalance(stock);
         }
-    }, 60000);
+    }, MINUTE);
 
    }
 
@@ -178,6 +190,9 @@ class MeanReversion {
       var isOpen = false;
       var marketChecker = setInterval(async ()=>{
         await this.alpaca.getClock().then(async (resp) => {
+
+          if(this.haltStrategy) clearInterval(marketChecker);
+
           isOpen = resp.is_open;
           if(isOpen) {
             clearInterval(marketChecker);
@@ -218,7 +233,7 @@ class MeanReversion {
       bars = resp[stock];
 
     }).catch((err) => {this.log(err.error);});
-
+    
     var currPrice = bars[bars.length - 1].closePrice;
     this.runningAverages[stock] = 0;
 
@@ -228,13 +243,15 @@ class MeanReversion {
 
     this.runningAverages[stock] /= 20;
 
+    if(this.haltStrategy) return;
+
     if(currPrice > this.runningAverages[stock]){
       // Sell our position if the price is above the running average, if any.
       if(positionQuantity > 0){
-        this.log("Setting position to zero.");
+        this.log("Setting "+stock+" position to zero.");
         await this.submitLimitOrder(positionQuantity, stock, currPrice, 'sell');
       }
-      else this.log("No position in the stock.  No action required.");
+      else this.log("No position in the "+stock+" stock.  No action required.");
     }
     else if(currPrice < this.runningAverages[stock]){
       // Determine optimal amount of shares based on portfolio and market data.
@@ -326,6 +343,7 @@ MeanReversion.remove=function(user){
       instanceAuthentication.secretKey==userAuthentication.secretKey){
 
         console.log(`\nRemoving currently-running strategy (${meanReversionInstance.getStrategyName()}) of ${user.email}`)
+        meanReversionInstance.setHaltStrategy(true)
     }
 
     return instanceAuthentication.apiKey!=userAuthentication.apiKey &&
