@@ -5,6 +5,7 @@ import './css/main.css'
 import './css/overview.css'
 import './css/stock-profiles.css'
 import './css/support.css'
+import './css/settings.css'
 
 import { 
   BrowserRouter as Router,
