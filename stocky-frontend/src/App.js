@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+
+import './css/main.css'
+import './css/overview.css'
+import './css/stock-profiles.css'
+import './css/support.css'
 
 import { 
   BrowserRouter as Router,
@@ -35,13 +39,12 @@ function App() {
                   <Route  path='/'  component={()=>(<OverviewPage email='paul@gmail.com' />) }  exact  />
                   <Route  path='/about'  component={AboutPage}    />
                   <Route  path='/settings'  component={SettingsPage}    />
-                  <Route  path='/stocks/:name'  component={StockPage}    />
+                  <Route  path='/stocks/:symbol'  component={({match})=>(<StockPage match={match} email='paul@gmail.com' />)}    />
                   <Route component={NotFoundPage} />
 
           </Switch>
-          
+                    
           <div id='footer'>Paul Okenne - paulokenne@cmail.carleton.ca</div>
-
           <NotificationContainer/>
       </Router>
        
