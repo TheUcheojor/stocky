@@ -1,20 +1,29 @@
 import express from 'express'
+
 import User from '../models/User'
 import Strategy from '../trading/strategyController'
 import connectToAlpaca from '../auxilliary/connectToAlpaca'
+import STRATEGIES from '../trading/strategyReference'
+
+
 
 const settingsRouter = express.Router()
 
 
 settingsRouter.post("/set-password",(req,res)=>{
 
-    const {email, password}= req.body;
+    const {email, oldPassword, newPassword}= req.body;
 
 
-    User.updateOne( {email: email}, {$set: {password: password}})
-    .then( ()=>{
-        console.log(`\n/settings/set-password - SUCCESS`)
-        res.status(200).json( {success:true, data:email})} 
+    User.updateOne( {email: email, password:oldPassword}, {$set: {password: newPassword}})
+    .then( (response)=>{
+        if(response.n<1 || response.nModified<1){
+            res.status(500).json({success:false, message:`Incorrect Password for ${email}`,error:"Invalid Password"})
+        }else{
+            console.log(`\n/settings/set-password - SUCCESS`)
+            res.status(200).json( {success:true, data:email})} 
+        }
+        
     ).catch(error=>{
         console.log(`\n/settings/set-password - FAILURE - ${error}`)
         res.status(500).json({success:false, message:`Cannot update password associated to email: ${email}`,error:`${error}`})
@@ -61,12 +70,41 @@ settingsRouter.post("/set-alpaca",(req,res)=>{
 
 })
 
+settingsRouter.get('/get-strategies',(req,res)=>{
+
+    const {email}=req.query
+
+    User.findOne({email:email})
+    .then((user)=>{
+        
+        let formatStategies=[]
+        
+        Object.keys(STRATEGIES).forEach(strategy=>{
+            formatStategies.push({
+                strategyKey:strategy,
+                strategyName:STRATEGIES[strategy].name,
+                isSetStrategy: user.settings.strategy ==strategy
+            })
+        })
+        res.status(200).json( {success:true, data:formatStategies})
+
+
+    }).catch(error=>{
+        console.log(`\n/settings/get-strategies - FAILURE - ${error}`)
+        res.status(500).json( {success:false, message:`Cannout find user ${email}`, error:`${error}`})
+    })
+
+})
+
+
 settingsRouter.post("/set-strategy",(req,res)=>{
 
-    const {email, strategy}= req.body;
+    const {email, strategy, stocks}= req.body;
 
+    // console.log(stocks)
     User.updateOne( {email: email}, {$set: {
         "settings.strategy": strategy,
+        "alpaca.stocks":stocks
     }})
     .then( ()=>{
         
