@@ -271,7 +271,18 @@ apiRouter.get('/portfolio-history',(req,res)=>{
 
 })
 
+apiRouter.get('/get-logs',(req,res)=>{
 
+    const {email}=req.query
+
+    User.findOne({email:email})
+    .then(user=>{
+        res.status(200).json({success:true, data:user.alpaca.logs})
+    }).catch(error=>{
+        console.log(`/api/get-logs - FAILURE -${error}`)
+        res.status(500).json({success:false, message:`Cannout find user with email ${email}`, error:`${error}`})
+    })
+})
 
 
 
