@@ -165,11 +165,36 @@ apiRouter.get('/stocks',(req,res)=>{
 
 apiRouter.get('/all-stock-profiles',(req,res)=>{
 
+    const {email}=req.query
+
+
     const STOCK_PROFILE_API="https://TheUcheojor.github.io/stocky-reference-data/stock-profiles.json"
     
     axios.get(STOCK_PROFILE_API)
     .then(axiosResponse=>{
-        res.status(200).json({success:true, data: axiosResponse.data })
+
+        const stockProfiles=axiosResponse.data
+
+        if(email){
+            User.findOne({email:email})
+            .then((user)=>{
+                stockProfiles.forEach((stockProfile,i)=>{
+                    stockProfiles[i].isInStockCollection=user.alpaca.stocks.includes(stockProfile.symbol)
+                })
+
+                res.status(200).json({success:true, data:stockProfiles  })
+
+            }).catch(error=>{
+                console.log(`\n/api/stocks - FAILURE - ${error}`)
+                res.status(500).json({success:false, message:`Server Error. Cannot access user profile`,error:`${error}`})
+
+            })
+
+        }else{
+            res.status(200).json({success:true, data:stockProfiles  })
+        }
+      
+
     }).catch(err=>{
         console.log(`\n/api/stocks - FAILURE - ${err}`)
         res.status(500).json({success:false, message:`Server Error. Cannot access stock-profiles`,error:`${err}`})
