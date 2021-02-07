@@ -201,6 +201,7 @@
     padding: 10px 15px;
     text-align: center;
     overflow: scroll;
+    position: relative;
   }
   
   .subcontainer{
@@ -226,4 +227,12 @@
   .container-subtitles:hover{
     cursor:default;
     color:#566270;
+  }
+
+  .empty-results{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    font-size: 18px;
+    transform: translate(50%,-50%);
   }
