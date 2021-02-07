@@ -5,6 +5,7 @@ const VerticalNavBar = ()=>(
     
     <nav id='vert-bar'>
         <Link to='/'> Overview</Link>
+        <Link to='/strategy-console'>Strategy Console</Link>
         <Link to='/settings'> Settings </Link>
         <Link to='/about'> About </Link>
 

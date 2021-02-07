@@ -6,6 +6,7 @@ import './css/overview.css'
 import './css/stock-profiles.css'
 import './css/support.css'
 import './css/settings.css'
+import './css/strategy-console.css'
 
 import { 
   BrowserRouter as Router,
@@ -22,6 +23,7 @@ import AboutPage from './pages/AboutPage'
 import StockPage from './pages/StockPage'
 import NotFoundPage from './pages/NotFoundPage'
 import SettingsPage from './pages/SettingsPage/SettingsPage'
+import StrategyConsolePage from './pages/StrategyConsolePage'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -40,9 +42,9 @@ function App() {
                   <Route  path='/'  component={()=>(<OverviewPage email='paul@gmail.com' />) }  exact  />
                   <Route  path='/about'  component={AboutPage}    />
                   <Route  path='/settings'  component={()=>( <SettingsPage email='paul@gmail.com' />)}    />
+                  <Route  path='/strategy-console'  component={()=>( <StrategyConsolePage email='paul@gmail.com' />)}    />
                   <Route  path='/stocks/:symbol'  component={({match})=>(<StockPage match={match} email='paul@gmail.com' />)}    />
                   <Route component={NotFoundPage} />
-
           </Switch>
                     
           <div id='footer'>Paul Okenne - paulokenne@cmail.carleton.ca</div>
