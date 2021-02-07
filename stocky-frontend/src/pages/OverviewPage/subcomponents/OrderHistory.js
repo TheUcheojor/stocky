@@ -7,12 +7,23 @@ const OrderHistory=({email,equity})=>{
     
 
     useEffect( ()=>{
+        const EmptyMessageElement=document.getElementsByClassName("empty-results order-history-empty")[0]
+
         fetch(`/api/get-order-history?email=${encodeURIComponent(email)}`)
         .then(res=>res.json())
         .then(result=>{
-            if(result.success) setOrders(result.data);
+
+            if(result.success){
+                setOrders(result.data);
+                (result.data)? EmptyMessageElement.classList.add("hide"):EmptyMessageElement.classList.remove("hide")
+                
+            }else{
+                EmptyMessageElement.classList.remove("hide")
+            } 
         }).catch(error=>{
             console.log(`error :${error}`)
+            EmptyMessageElement.classList.remove("hide")
+
         })
 
     },[equity])
@@ -64,6 +75,10 @@ const OrderHistory=({email,equity})=>{
 
                     </tbody>
                 </table>
+
+                <div className="empty-results order-history-empty hide">
+                    No Order History To Display
+                </div>
             </div>
         </div>
 

@@ -27,8 +27,11 @@ const StrategySetttings=({email})=>{
             if(sotckStrategyResponse.success){
                 setStockStrategies(sotckStrategyResponse.data)
             }else{
-                NotificationManager.error("Stock Strategy", sotckStrategyResponse.message)
+                NotificationManager.error("Stock Strategy", stockProfileRespone.message)
             }
+        }).catch(error=>{
+            NotificationManager.error("Stock Strategy", "Cannot fetch strategy data")
+
         })
 
 

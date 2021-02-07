@@ -13,17 +13,23 @@ const fetchPortfolioHistory= (period, canvasId,email,timeScale)=>{
             // console.log(result)
             if(result.success){
 
-                    addGraphToCanvas(
-                        {
-                            canvasId:canvasId,
-                            xValues:result.data.timestamp,
-                            yValues:result.data.equity,
-                            timeScale:timeScale
-                        }
-                    )                
+                document.getElementsByClassName("empty-results live-overview-empty")[0].classList.add("hide")
+
+                addGraphToCanvas(
+                    {
+                        canvasId:canvasId,
+                        xValues:result.data.timestamp,
+                        yValues:result.data.equity,
+                        timeScale:timeScale
+                    }
+                )                
+            }else{
+                document.getElementsByClassName("empty-results live-overview-empty")[0].classList.remove("hide")
             }
         }).catch(error=>{
             console.log("/api/portfolio-history - Failure"+error)
+            document.getElementsByClassName("empty-results live-overview-empty")[0].classList.remove("hide")
+
         })
 
 }
@@ -62,6 +68,9 @@ const LiveOverview=({email,equity})=>{
                     <canvas className="overview-graph" id="overview-day-graph"> </canvas>
                     <canvas className="overview-graph hide" id="overview-week-graph"> </canvas>
                     <canvas className="overview-graph hide" id="overview-year-graph"> </canvas>
+            </div>
+            <div className="empty-results live-overview-empty hide">
+                No Graphs To Display
             </div>
         </div>
     )
