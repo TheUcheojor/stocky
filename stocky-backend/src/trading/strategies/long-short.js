@@ -119,7 +119,7 @@ class LongShort {
     return new Promise(resolve => {
       const check = async () => {
 
-        if(this.haltStrategy) clearInterval(spin);
+        if(this.haltStrategy) clearInterval(check);
         
 
         try {
