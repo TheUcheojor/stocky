@@ -1,0 +1,23 @@
+.content.strategy-console .container {
+    padding: 20px 15px;
+    height: 90%;
+    position: relative;
+}
+
+.content.strategy-console .container .container-title{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.strategy-log{
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+    display: block;
+    margin-top: 10px;
+}
+
+.empty-results.strategy-console-empty{
+    top:25%;
+    /* transform: translate(30%,-50%); */
+}
