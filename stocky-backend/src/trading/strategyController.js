@@ -1,12 +1,4 @@
-
-import LongShort from './strategies/long-short'
-import MeanReversion from './strategies/mean-reversion'
-
-
-const STRATEGIES={
-    LONG_SHORT:"LONG_SHORT", 
-    MEAN_REVERSION:"MEAN_REVERSION", 
-}
+import STRATEGIES from './strategyReference'
 
 
 class Strategy{
@@ -37,18 +29,20 @@ class Strategy{
 
         this.stopUserStrategies(user);
 
-        if(user.settings.strategy==STRATEGIES.LONG_SHORT){
-            return LongShort.create(user)
-        }else if( user.settings.strategy==STRATEGIES.MEAN_REVERSION){
-            return MeanReversion.create(user)
+        if( Object.keys(STRATEGIES).includes(user.settings.strategy)){
+            return STRATEGIES[user.settings.strategy].strategyClass.create(user)
         }
+
         return null
     }
 
     stopUserStrategies(user){
         // console.log(user)
-        LongShort.remove(user)
-        MeanReversion.remove(user)
+
+        for( let strategyKey in STRATEGIES){
+            STRATEGIES[strategyKey].strategyClass.remove(user)
+        }
+
     }
 
 
