@@ -21,7 +21,7 @@ import OverviewPage from './pages/OverviewPage/OverviewPage'
 import AboutPage from './pages/AboutPage'
 import StockPage from './pages/StockPage'
 import NotFoundPage from './pages/NotFoundPage'
-import SettingsPage from './pages/SettingsPage'
+import SettingsPage from './pages/SettingsPage/SettingsPage'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -39,7 +39,7 @@ function App() {
           <Switch>
                   <Route  path='/'  component={()=>(<OverviewPage email='paul@gmail.com' />) }  exact  />
                   <Route  path='/about'  component={AboutPage}    />
-                  <Route  path='/settings'  component={SettingsPage}    />
+                  <Route  path='/settings'  component={()=>( <SettingsPage email='paul@gmail.com' />)}    />
                   <Route  path='/stocks/:symbol'  component={({match})=>(<StockPage match={match} email='paul@gmail.com' />)}    />
                   <Route component={NotFoundPage} />
 
