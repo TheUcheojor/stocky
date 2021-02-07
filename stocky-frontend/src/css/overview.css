@@ -22,6 +22,7 @@
   /* Account Details */
   .account-details{
     grid-area: account-details ;
+    width: 100%;
   }
   
   /* Daily Profit */
