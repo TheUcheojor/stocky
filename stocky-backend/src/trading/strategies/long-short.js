@@ -1,3 +1,9 @@
+/*
+  Authors: Alpaca Contributors, Paul Okenne
+*/
+
+import strategyLog from '../strategyLog'
+
 const Alpaca = require('@alpacahq/alpaca-trade-api')
 
 
@@ -36,19 +42,23 @@ class LongShort {
     this.shortAmount = 0
     this.timeToClose = null
     this.bucketPct = bucketPct
+
   }
 
   setHaltStrategy(status){
     this.haltStrategy=status
     this.log("STOP LONG_SHORT STRATEGY")
-
   }
 
   log(msg){
     let date=new Date()
     let time =`${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
 
-    console.log(`\n${this.email} [${this.getStrategyName()}] [${time}] - ${msg}`)
+    let formattedMessage=`\n${this.email} | [${this.getStrategyName()}] [${time}] - ${msg}`;
+
+    console.log(formattedMessage)
+    strategyLog(this.email, formattedMessage)  
+    
   }
 
   getStrategyName(){
@@ -165,6 +175,8 @@ class LongShort {
   }
 
   async run () {
+    this.log("Initiated strategy "+this.getStrategyName())
+
     // First, cancel any existing orders so they don't impact our buying power.
     await this.cancelExistingOrders()
 
