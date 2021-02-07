@@ -8,7 +8,7 @@ const ManualOrder= ({email})=>{
 
     useEffect( ()=>{
 
-        fetch('/api/all-stock-profiles')
+        fetch(`/api/all-stock-profiles`)
         .then( res=> res.json())
         .then(result => {
             let newStockSymbols=[]
