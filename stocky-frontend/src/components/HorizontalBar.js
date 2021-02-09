@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+import logoutIcon from '../resources/logout.png'
 
 
-const HorizontalBar=()=>{
+const HorizontalBar=({name,logoutUser})=>{
 
     const [results, setResults] = useState([])
 
@@ -43,7 +44,9 @@ const HorizontalBar=()=>{
             </ul>
 
         </div> 
-        <span className='username'> Paul Okenne </span>
+        <span className='username'>{name} </span>
+
+        <img src={logoutIcon} id="logout" onClick={logoutUser}></img>
      </div>
 
 )}

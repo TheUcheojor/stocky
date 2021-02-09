@@ -138,8 +138,19 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     padding: 0 10px;
     font-weight: 900;
+    flex:1;
+    text-align: center;
   }
   
+  #logout{
+    height:60%;
+    padding:10px;
+    filter:invert(1);
+  }
+
+  #logout:hover{
+    filter:invert(0.8);
+  }
   /* Horizontal Bar Design - ENDS */
   
   

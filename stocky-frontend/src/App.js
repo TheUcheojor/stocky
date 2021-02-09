@@ -37,7 +37,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 function App() {
 
-  const {user, setUser}= useUser();
+  const {user, setUser,logoutUser}= useUser();
 
   if(!user){
     return <LoginRegisterPage setUser={setUser} />
@@ -51,13 +51,13 @@ function App() {
       <Router>
           <div id='header'> Stocky </div>
           <VerticalNavBar />
-          <HorizontalBar />
+          <HorizontalBar name={user.name} logoutUser={logoutUser} />
           <Switch>
-                  <Route  path='/'  component={()=>(<OverviewPage email='paul@gmail.com' />) }  exact  />
+                  <Route  path='/'  component={()=>(<OverviewPage email={user.email} />) }  exact  />
                   <Route  path='/about'  component={AboutPage}    />
-                  <Route  path='/settings'  component={()=>( <SettingsPage email='paul@gmail.com' />)}    />
-                  <Route  path='/strategy-console'  component={()=>( <StrategyConsolePage email='paul@gmail.com' />)}    />
-                  <Route  path='/stocks/:symbol'  component={({match})=>(<StockPage match={match} email='paul@gmail.com' />)}    />
+                  <Route  path='/settings'  component={()=>( <SettingsPage email={user.email} />)}    />
+                  <Route  path='/strategy-console'  component={()=>( <StrategyConsolePage email={user.email} />)}    />
+                  <Route  path='/stocks/:symbol'  component={({match})=>(<StockPage match={match} email={user.email} />)}    />
                   <Route component={NotFoundPage} />
           </Switch>
                     
