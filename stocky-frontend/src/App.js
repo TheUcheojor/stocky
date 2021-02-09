@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
 
 import './css/main.css'
@@ -7,6 +7,7 @@ import './css/stock-profiles.css'
 import './css/support.css'
 import './css/settings.css'
 import './css/strategy-console.css'
+import './css/login-register.css'
 
 import { 
   BrowserRouter as Router,
@@ -25,16 +26,29 @@ import NotFoundPage from './pages/NotFoundPage'
 import SettingsPage from './pages/SettingsPage/SettingsPage'
 import StrategyConsolePage from './pages/StrategyConsolePage'
 
+import LoginRegisterPage from './pages/LoginRegisterPage/LoginRegisterPage'
+
+import useUser from './custom_hooks/useUser'
+
 import 'react-notifications/lib/notifications.css';
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 function App() {
-  return (
-    <>
-      <Router>
 
+  const {user, setUser}= useUser();
+
+  if(!user){
+    return <LoginRegisterPage setUser={setUser} />
+  }
+  console.log(user)
+
+  return (
+
+  
+
+      <Router>
           <div id='header'> Stocky </div>
           <VerticalNavBar />
           <HorizontalBar />
@@ -51,7 +65,6 @@ function App() {
           <NotificationContainer/>
       </Router>
        
-    </>
   );
 }
 
