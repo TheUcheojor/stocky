@@ -1,0 +1,124 @@
+
+
+.login-register-container{
+    display: inline-block;
+    vertical-align: top;
+    background: #fff;
+    position: absolute;
+    padding: 20px;
+    width: 50%;
+    top:45%;
+    right:50%;
+    transform: translate(50%,-50%);
+    box-shadow: 0 0rem 9.375rem rgba(90,97,105,.1), 0 0.25rem 0.5rem rgba(90,97,105,.12), 0 0.9375rem 1.375rem rgba(90,97,105,.1), 0 0.4375rem 2.1875rem rgba(165,182,201,.1);
+    border-radius: 10px;
+}
+
+
+
+.container-options{
+    display: flex;
+    background: black;
+    color:#fff;
+    /* padding: 15px; */
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 550;
+    margin-bottom: 20px;
+}
+
+.container-options .option{
+    padding:10px;
+    /* display: inline-block; */
+    flex:1;
+    text-align: center;
+}
+
+.container-options .option:hover{
+    background: 	rgb(68, 66, 66);
+    cursor: default;
+}
+
+.highlight{
+    background: #5c5959;
+}
+
+
+#login-register-footer{
+    display:block;
+    position: absolute;
+    width: -webkit-fill-available;
+    bottom:0px;
+    background: #fff;
+    padding:20px;
+}
+
+.project-title{
+    display:block;
+    position: absolute;
+    text-align: center;
+    top:10%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    font-weight: bold;
+    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.form-group{
+    margin: 10px;
+    margin-left: 0;
+}
+.form-group.error{
+    color: #ff0033;
+    margin-bottom: 20px;
+
+
+}
+
+.form-group-name{
+    display: block;  
+    margin-bottom:5px ;
+
+}
+
+.form-group-item{
+    display: block;  
+    padding: 10px;
+    width: -webkit-fill-available;
+    font-size: 12px;
+}
+
+
+
+
+.action-button{
+    width: 100%;
+    /* padding: 10px; */
+
+    background-color: rgba(0,0,0,1);
+    color: white;
+    padding: 14px 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-button:hover{
+    background-color:rgba(0,0,0,0.7);
+}
+
+
+
+.error{
+    border-color:#ff0033 ;
+}
+
+@media only screen and (max-width: 600px) {
+    .login-register-container{
+        width:80%;
+        top:50%;
+    }
+}
