@@ -39,7 +39,7 @@ const StrategyConsolePage=({email})=>{
             {
                 logs.map((log,i)=>(
                         <span key={i} className="strategy-log">
-                        <b>{log.split("|")[0]}</b> {log.split("|")[1]}
+                        <b>{log.split("^^^")[0]}</b> {log.split("^^^")[1]}
                         </span>
                     )
                 )
