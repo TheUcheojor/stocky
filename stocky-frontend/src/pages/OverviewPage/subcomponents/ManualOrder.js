@@ -92,18 +92,5 @@ const ManualOrder= ({email})=>{
     )
 }
 
-// grid-template-areas: 
-//   'info-title info-title'
-//   'order-type market-type'
-//   'symbol time-in-force',
-//   'quantity quantity' 
-//   'create-order create-order' ; 
-
-
-// symbol: symbol, // any valid ticker symbol
-//             qty: qty, //number
-//             side: side, //'buy' | 'sell',
-//             type: type, //'market' | 'limit' | 'stop' | 'stop_limit' | 'trailing_stop',
-//             time_in_force:timeInForce, //'day' | 'gtc' | 'opg' | 'ioc',
 
 export default ManualOrder
