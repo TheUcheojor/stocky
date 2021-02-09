@@ -29,6 +29,7 @@ import StrategyConsolePage from './pages/StrategyConsolePage'
 import LoginRegisterPage from './pages/LoginRegisterPage/LoginRegisterPage'
 
 import useUser from './custom_hooks/useUser'
+import showMobileNavigationMenu from './support/showMobileNavigationMenu'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -49,7 +50,7 @@ function App() {
   
 
       <Router>
-          <div id='header'> Stocky </div>
+          <div id='header' onClick={showMobileNavigationMenu}> Stocky </div>
           <VerticalNavBar />
           <HorizontalBar name={user.name} logoutUser={logoutUser} />
           <Switch>
