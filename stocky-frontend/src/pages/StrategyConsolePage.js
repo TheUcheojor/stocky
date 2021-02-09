@@ -8,7 +8,7 @@ const StrategyConsolePage=({email})=>{
 
     useEffect(()=>{
 
-        const EmptyMessageElement=document.getElementsByClassName("empty-results strategy-console-empty")[0]
+        const EmptyMessageElement=document.getElementsByClassName("empty-results strategy-console-empty")[0];
 
         fetch(`/api/get-logs?email=${email}`)
         .then((res)=>res.json())
@@ -16,10 +16,10 @@ const StrategyConsolePage=({email})=>{
             
             if(response.success){
                 setLogs(response.data.reverse());
-                (response.data)? EmptyMessageElement.classList.add("hide"):EmptyMessageElement.classList.remove("hide")
+                (response.data.length>0)? EmptyMessageElement.classList.add("hide"):EmptyMessageElement.classList.remove("hide");
             }else{
-                NotificationManager.error("Logs", response.message)
-                EmptyMessageElement.classList.remove("hide")
+                NotificationManager.error("Logs", response.message);
+                EmptyMessageElement.classList.remove("hide");
             }
 
         }).catch(error=>{
