@@ -1,58 +1,78 @@
 import express from 'express'
+import bcrypt from 'bcrypt'
 
 import User from '../models/User'
-import keys from '../config/setup'
 
 import connectToAlpaca from '../auxilliary/connectToAlpaca'
-import account from '@alpacahq/alpaca-trade-api/lib/resources/account'
 
-const userRouter = express.Router()
+const userRouter = express.Router();
+
+const SALT_ROUNDS= 10;
+
+userRouter.post('/register',(req,res)=>{
+
+    const { email, name, password } = req.body
+
+    bcrypt.hash(password, SALT_ROUNDS)
+    .then((hashedPassword)=>{
+         // const newUser =new User
+        new User({
+            email:email.toLowerCase().trim(),
+            name:name,
+            password:hashedPassword,
+        }).save()
+        .then((user)=>{
+
+            const userInfo={
+                email:user.email,
+                name:user.name,
+            };
+
+            console.log(`\n /users/login - SUCCESS`)
+            res.status(200).json({success:true, data:userInfo})
+            res.status(200).json({success:true,message:'Account Created'})
+        }).catch( (err)=>{
+            console.log(err)
+            res.status(500).json({success:false,message:"Cannot create account. Try a different email", error:`${err}` } )
+        })
 
 
-userRouter.post('/sign-up',(req,res)=>{
-
-    const { email, password } = req.body
-
-    // const newUser =new User
-    new User({
-        email:email.toLowerCase().trim(),
-        password:password,
-        alpaca:{secretKey:'',apiKey:'', equity:0, buying_power:0},
-        settings:{strategy:'' },
-        orderHistoryReference:null
-        
-    }).save()
-    .then(()=>{
-        res.status(200).json({success:true,message:'Account Created'})
-    }).catch( (err)=>{
-        console.log(err)
-        res.status(500).json({success:false,message:"Cannot create the user", error:`${err}` } )
     })
+   
 })
 
 userRouter.post('/login',(req,res)=>{
 
     const {email, password}= req.body
 
-    console.log("Recieved /user/login request")
-
     User.findOne({email:email.toLowerCase().trim()})
     .then((user)=>{
 
-        console.log(user._id)
+        bcrypt.compare(password, user.password)
+        .then(result=>{
+            if(result){
 
-        if(password==user.password){
-            res.status(200).json({success:true, data:user.email})
-        }
-        
-        res.status(500).json({
-            success:false,
-            message:'Enter valid creditials',
-            error:'Passwords are not equal',
+                const userInfo={
+                    email:user.email,
+                    name:user.name,
+                };
+    
+                console.log(`\n /users/login - SUCCESS`)
+                res.status(200).json({success:true, data:userInfo})
+            }else{
+                console.log(`\n /users/login - FAILED -Password are not equal `)
+    
+                res.status(500).json({
+                    success:false,
+                    message:'Enter valid credentials',
+                    error:'Passwords are not equal',
+                })
+            }
+
         })
 
     }).catch( (err)=>{
-        console.log(`\n /users/login - FAILE -${err} `)
+        console.log(`\n /users/login - FAILED -${err} `)
         res.status(500).json({
             success:false,
             message:'Enter valid creditials',
