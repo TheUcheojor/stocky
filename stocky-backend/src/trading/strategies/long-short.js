@@ -54,7 +54,7 @@ class LongShort {
     let date=new Date()
     let time =`${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
 
-    let formattedMessage=`\n${this.email} | [${this.getStrategyName()}] [${time}] - ${msg}`;
+    let formattedMessage=`\n${this.email} ^^^ [${this.getStrategyName()}] [${time}] - ${msg}`;
 
     console.log(formattedMessage)
     strategyLog(this.email, formattedMessage)  
@@ -89,6 +89,7 @@ class LongShort {
           type: 'market',
           time_in_force: 'day'
         })
+        
         this.log(`Market order of | ${quantity} ${stock} ${side} | completed.`)
         resolve(true)
       } catch (err) {
