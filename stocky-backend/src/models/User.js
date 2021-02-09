@@ -1,11 +1,15 @@
-
 import mongoose from 'mongoose'
+import strategyReference from '../trading/strategyReference'
 
 const userSchema=mongoose.Schema({
+    name:{
+        type:String,
+        required : [true, "Please enter a name"],
+    },
     email: {
         type:String, 
         unique : true,
-        required : true,
+        required : [true,"Please enter an email"],
         dropDups: true,
     },
     password: {
@@ -13,12 +17,10 @@ const userSchema=mongoose.Schema({
     },
     alpaca:{
         secretKey:{
-            type:String,
-            unique : true,
-        }, 
+            type:String
+        },
         apiKey:{
-            type:String,
-            unique : true,
+            type:String
         },
         stocks:[{
             type:String
@@ -28,7 +30,10 @@ const userSchema=mongoose.Schema({
         }]   
     },
     settings:{
-        strategy:String,  
+        strategy:{
+            type:String,
+            default: strategyReference.MEAN_REVERSION.name
+        },  
     },    
 })
 
