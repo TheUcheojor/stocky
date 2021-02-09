@@ -15,7 +15,7 @@ userRouter.post('/register',(req,res)=>{
 
     bcrypt.hash(password, SALT_ROUNDS)
     .then((hashedPassword)=>{
-         // const newUser =new User
+
         new User({
             email:email.toLowerCase().trim(),
             name:name,

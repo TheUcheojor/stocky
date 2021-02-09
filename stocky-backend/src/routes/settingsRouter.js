@@ -46,7 +46,6 @@ settingsRouter.post("/set-alpaca",(req,res)=>{
     })
 
     //Test that given keys are valid 
-        
     userTestAlpaca.getAccount()
      .then((placeholder)=>{
 
@@ -111,7 +110,6 @@ settingsRouter.post("/set-strategy",(req,res)=>{
         User.findOne({email:email})
         .then( (user)=>{
             
-            // console.log(user)
             const userStrategy=new Strategy(user);
             userStrategy.runStrategy();
             

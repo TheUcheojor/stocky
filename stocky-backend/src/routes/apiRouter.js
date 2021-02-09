@@ -23,8 +23,6 @@ apiRouter.get('/get-order-history', (req,res)=>{
         const alpaca=connectToAlpaca(user)
 
         const MAX_ACTIVITIES= 10;
-        // { activityTypes, until, after, direction, date, pageSize }: 
-        // { activityTypes: any; until: any; after: any; direction: any; date: any; pageSize: any; }
        
         alpaca.getAccountActivities({activityTypes:["FILL"], pageSize: MAX_ACTIVITIES, direction:'desc'})
         .then( (activities)=>{
@@ -134,7 +132,6 @@ apiRouter.get('/search',(req,res)=>{
     
 })
 
-//May not be needed in the future as search provides similar functionality
 apiRouter.get('/stocks',(req,res)=>{
 
     const {name}=req.query
