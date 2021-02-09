@@ -57,7 +57,7 @@ class MeanReversion {
     let date=new Date()
     let time =` ${date.getMonth()}/${date.getMonth()}/${date.getDate()} - ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}  `;
 
-    let formattedMessage=`\n${this.email} | [${this.getStrategyName()}] [${time}] - ${msg}`;
+    let formattedMessage=`\n${this.email} ^^^ [${this.getStrategyName()}] [${time}] - ${msg}`;
 
     console.log(formattedMessage)
     strategyLog(this.email, formattedMessage)  
