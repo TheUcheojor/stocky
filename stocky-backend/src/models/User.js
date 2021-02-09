@@ -32,7 +32,7 @@ const userSchema=mongoose.Schema({
     settings:{
         strategy:{
             type:String,
-            default: strategyReference.MEAN_REVERSION.name
+            default: strategyReference.MEAN_REVERSION.key
         },  
     },    
 })

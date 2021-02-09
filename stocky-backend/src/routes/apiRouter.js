@@ -85,7 +85,7 @@ apiRouter.get('/get-order-history', (req,res)=>{
         }).catch( (error)=>{
             console.log(`\n/get-order-history - FAILURE - error: ${error}`)
 
-            res.status(500).json({success:false, message:`Server Error. Cannot acess account-activities`,error:`${error}`})
+            res.status(500).json({success:false, message:`Cannot connect to Alpaca`,error:`${error}`})
         })
 
 
@@ -231,7 +231,7 @@ apiRouter.post("/create-order", (req, res)=>{
 
     }).catch(error=>{
         console.log(`\n/api/create-order - FAILURE - ${error}`)
-        res.status(500).json({success:false, message:`Cannot find user with email ${email}`,error:`${error}`})
+        res.status(500).json({success:false, message:`Cannot connect to Alpaca`,error:`${error}`})
     })
 
 
@@ -265,7 +265,7 @@ apiRouter.get('/portfolio-history',(req,res)=>{
 
     }).catch( error=>{
         console.log(`/api/portfolio-history - FAILURE -${error}`)
-        res.status(500).json({success:false, message:`Cannout find user with email ${email}`, error:`${error}`})
+        res.status(500).json({success:false, message:`Cannot connect to Alpaca`, error:`${error}`})
     })
 
 

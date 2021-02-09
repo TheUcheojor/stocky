@@ -112,7 +112,7 @@ userRouter.get('/account', (req,res)=>{
 
     }).catch((err)=>{
         console.log(`\n /users/account - FAILURE - ${err} `)
-        res.status(500).json({success:false, message:`${err}`})
+        res.status(500).json({success:false, message:`Cannot connect to Alpaca`})
     })
 
 
