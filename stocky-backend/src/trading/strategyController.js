@@ -20,7 +20,7 @@ class Strategy{
                 console.log("\nAn error occurred: "+error)
             }
         }else{
-            console.log("\nNo strategy to run ")
+            console.log("\nCannot run strategy. No strategy to run or keys. Error occurred ")
         } 
         
     }
