@@ -156,6 +156,7 @@
     margin: 5px 0;
     max-height:87%;
     overflow:auto;
+    min-height: 150px;
   }
   
   #order-history-table {
@@ -187,6 +188,9 @@
     background-color: #000;
     color: white;
   }
+
+  
+
   
   /* Manual Order */
   .manual-order{
@@ -254,4 +258,29 @@
   .manual-order .create-order{
     grid-area: create-order;
   }
+
   
+  @media only screen and (max-width: 760px) {
+
+  .content.overview {
+    display: grid;
+    grid-template-columns: unset;
+    grid-template-rows: auto auto auto 1fr 1fr;
+    grid-template-areas:
+        "account-details"
+        "daily-profit"
+        "api-info"
+        "live-overview "
+        "manual-order"
+        "order-history" ;
+    /* grid-gap: 15px; */
+  }
+
+  .container.account-details{
+    width: unset;
+  }
+
+  .empty-results.order-history-empty{
+    top:60%;
+  }
+}

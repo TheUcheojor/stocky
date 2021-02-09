@@ -1,7 +1,7 @@
 import React from 'react'
 
 const AboutPage=()=>(
-    <div id='content'> 
+    <div className='content about-page'> 
          
 
         <div className="container" style={{textAlign:'left'}}>
