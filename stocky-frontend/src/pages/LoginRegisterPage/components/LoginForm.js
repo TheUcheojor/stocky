@@ -25,6 +25,7 @@ import loginHandler from '../support/loginHandler'
                 <div className="form-group">
                         <button className="action-button" onClick={(e)=>loginHandler({
                             e,
+                            setUser,
                             emailRef,
                             passwordRef,
                             setError})}>Login</button>
