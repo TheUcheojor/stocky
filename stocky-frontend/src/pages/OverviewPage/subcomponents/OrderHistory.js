@@ -18,8 +18,12 @@ const OrderHistory=({email,equity})=>{
                 (result.data)? EmptyMessageElement.classList.add("hide"):EmptyMessageElement.classList.remove("hide")
                 
             }else{
-                EmptyMessageElement.classList.remove("hide")
+
+                if(document.getElementsByClassName("order-history-item").length <1){
+                    EmptyMessageElement.classList.remove("hide")
+                }
             } 
+
         }).catch(error=>{
             console.log(`error :${error}`)
             EmptyMessageElement.classList.remove("hide")
@@ -51,7 +55,7 @@ const OrderHistory=({email,equity})=>{
 
                         {
                             orders.map((order,i)=>(
-                                <tr key={i}> 
+                                <tr key={i} className="order-history-item"> 
                                     <td>{order.symbol}</td>
                                     <td>
                                         {order.order_type.replace(/^\w/, (c) => c.toUpperCase())} {order.type.toUpperCase()}
