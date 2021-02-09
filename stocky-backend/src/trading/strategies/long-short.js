@@ -247,9 +247,13 @@ class LongShort {
 
     if(this.haltStrategy)return;
     
-
-    this.log(`We are taking a long position in: ${this.long.toString()}`)
-    this.log(`We are taking a short position in: ${this.short.toString()}`)
+    if(this.log && this.log){
+      this.log(`We are taking a long position in: ${this.long.toString()}`)
+      this.log(`We are taking a short position in: ${this.short.toString()}`)
+    }else{
+      this.log(`We are looking for favourable long/short positions to take`)
+    }
+    
 
     // Remove positions that are no longer in the short or long list, and make a list of positions that do not need to change.
     // Adjust position quantities if needed.
