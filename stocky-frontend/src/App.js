@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import logo from './logo.svg';
 
+import 'sweetalert2/src/sweetalert2.scss'
 import './css/main.css'
 import './css/overview.css'
 import './css/stock-profiles.css'
@@ -33,7 +34,6 @@ import showMobileNavigationMenu from './support/showMobileNavigationMenu'
 
 import 'react-notifications/lib/notifications.css';
 
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 function App() {
@@ -63,7 +63,6 @@ function App() {
           </Switch>
                     
           <div id='footer'>Paul Okenne - paulokenne@cmail.carleton.ca</div>
-          <NotificationContainer/>
       </Router>
        
   );

@@ -1,5 +1,6 @@
 
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../../../support/notificationReference'
 
 
 const NEW_PASSWORD_MATCHING_ERROR="You new password does not match"
@@ -11,7 +12,7 @@ const savePassword=(email)=>{
     let confirmNewPassword=document.getElementById('new-password-confirm').value
 
     if(newPassword!==confirmNewPassword){
-        NotificationManager.error("Password Setting", NEW_PASSWORD_MATCHING_ERROR)
+        Swal.fire("Password Setting", NEW_PASSWORD_MATCHING_ERROR, notificationRefeference.FAILURE)
         return;
     }
 
@@ -30,12 +31,12 @@ const savePassword=(email)=>{
     .then( result=>{
 
         if(result.success){
-            NotificationManager.success("Password Settings", "Your password has been updated")
+            Swal.fire("Password Settings", "Your password has been updated",notificationRefeference.SUCCESS)
         }else{
-            NotificationManager.error("Password Settings", result.message)
+            Swal.fire("Password Settings", result.message,notificationRefeference.FAILURE)
         }
     }).catch(error=>{
-        NotificationManager.error("Password Settings", "Cannout change your password")
+        Swal.fire("Password Settings", "Cannout change your password".notificationRefeference.FAILURE)
 
     })
 

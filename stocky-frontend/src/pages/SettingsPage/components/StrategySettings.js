@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../../../support/notificationReference'
 
 import setStrategy from '../support/setStrategy'
 
@@ -20,17 +21,17 @@ const StrategySetttings=({email})=>{
             if(stockProfileRespone.success){
                 setStockOptions(stockProfileRespone.data)
             }else{
-                NotificationManager.error("Stock Profiles", stockProfileRespone.message)
+                Swal.fire("Stock Profiles", stockProfileRespone.message, notificationRefeference.FAILURE)
             }
 
-            const sotckStrategyResponse=result[1]
-            if(sotckStrategyResponse.success){
-                setStockStrategies(sotckStrategyResponse.data)
+            const stockStrategyResponse=result[1]
+            if(stockStrategyResponse.success){
+                setStockStrategies(stockStrategyResponse.data)
             }else{
-                NotificationManager.error("Stock Strategy", stockProfileRespone.message)
+                Swal.fire("Stock Strategy", stockProfileRespone.message,notificationRefeference.FAILURE)
             }
         }).catch(error=>{
-            NotificationManager.error("Stock Strategy", "Cannot fetch strategy data")
+            Swal.fire("Stock Strategy", "Cannot fetch strategy data", notificationRefeference.FAILURE)
 
         })
 

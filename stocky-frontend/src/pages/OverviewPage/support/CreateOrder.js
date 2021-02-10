@@ -1,5 +1,6 @@
 
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../../../support/notificationReference';
 
 
 const createOrder=({email})=>{
@@ -34,14 +35,16 @@ const createOrder=({email})=>{
 
         if(result.success){
             console.log(`Your ${symbol} order has been created.`)
-            NotificationManager.success("Order Creation", `Your ${symbol} order has been created.`)
+            Swal.fire("Order Creation", `Your ${symbol} order has been created.`, notificationRefeference.SUCCESS)
         }else{
-            NotificationManager.warning("Order Creation", result.message)
+            Swal.fire("Order Creation", result.message,notificationRefeference.FAILURE)
             console.log(`Your order has not been created: ${result.message}`)
         }
 
 
     }).catch(error=>{
+        const errorMessage="Cannot create your order"
+        Swal.fire("Order Creation", errorMessage,notificationRefeference.FAILURE)
         console.log('error creating orders: '+error)
     })
 

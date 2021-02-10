@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../support/notificationReference'
 
 const StrategyConsolePage=({email})=>{
 
@@ -18,12 +19,12 @@ const StrategyConsolePage=({email})=>{
                 setLogs(response.data.reverse());
                 (response.data.length>0)? EmptyMessageElement.classList.add("hide"):EmptyMessageElement.classList.remove("hide");
             }else{
-                NotificationManager.error("Logs", response.message);
+                Swal.fire("Logs", response.message, notificationRefeference.FAILURE);
                 EmptyMessageElement.classList.remove("hide");
             }
 
         }).catch(error=>{
-            NotificationManager.error("Logs", "Server Error. Cannot access logs")
+            Swal.fire("Logs", "Server Error. Cannot access logs",notificationRefeference.FAILURE)
             EmptyMessageElement.classList.remove("hide")
             console.log(error)
         })

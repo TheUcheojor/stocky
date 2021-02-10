@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import logoutIcon from '../resources/logout.png'
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../support/notificationReference'
 
 const HorizontalBar=({name,logoutUser})=>{
 
@@ -19,7 +19,7 @@ const HorizontalBar=({name,logoutUser})=>{
             if(response.success){
                 setResults(response.data)
             }else{
-                NotificationManager.error(response.message)
+                Swal.fire('Search', response.message,notificationRefeference.FAILURE)
             }
         })
     }

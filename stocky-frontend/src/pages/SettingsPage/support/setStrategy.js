@@ -1,4 +1,5 @@
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../../../support/notificationReference'
 
 const setStrategy=(email)=>{
 
@@ -19,14 +20,14 @@ const setStrategy=(email)=>{
     .then(result=>{
 
         if(result.success){
-            NotificationManager.success("Trading Strategy","Your strategy has been saved")
+            Swal.fire("Trading Strategy","Your strategy has been saved",notificationRefeference.SUCCESS)
         }else{
-            NotificationManager.error("Trading Strategy",result.message)
+            Swal.fire("Trading Strategy",result.message,notificationRefeference.FAILURE)
 
         }
 
     }).catch(error=>{
-        NotificationManager.error("Trading Strategy","Cannot save strategy settings")
+        Swal.fire("Trading Strategy","Cannot save strategy settings",notificationRefeference.FAILURE)
     })
 
 }

@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import notificationRefeference from '../support/notificationReference'
+
 
 const addStockToStrategy=(email,symbol)=>{
 
@@ -17,9 +19,9 @@ const addStockToStrategy=(email,symbol)=>{
     .then(result=>{
 
         if(result.success) {
-            NotificationManager.success(`Added ${symbol.toUpperCase()} to your stock collection`)
+            Swal.fire('Stock Collection', `Added ${symbol.toUpperCase()} to your stock collection`, notificationRefeference.SUCCESS)
         }else{
-            NotificationManager.error(result.message)
+            Swal.fire('Stock Collection',result.message, notificationRefeference.FAILURE)
         }
     })
 
@@ -43,11 +45,11 @@ const StockPage =({match,email})=>{
             if(result.success){
                 setStockProfile(result.data)
             }else{
-                NotificationManager.error("Stock Profile", result.message)
+                Swal.fire("Stock Profile", result.message,notificationRefeference.SUCCESS)
             }
 
         }).catch(error=>{
-            NotificationManager.error("Stock Profile", error)
+            Swal.fire("Stock Profile", error, notificationRefeference.FAILURE)
         })
 
 
