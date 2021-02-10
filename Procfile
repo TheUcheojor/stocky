@@ -1,0 +1,1 @@
+web: cd stocky-backend && npm run devStart
