@@ -2,3 +2,4 @@
 /stocky-frontend/node_modules
 /stocky-backend/src/build
 *.env
+node_modules
