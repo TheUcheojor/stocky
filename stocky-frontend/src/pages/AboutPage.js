@@ -17,6 +17,11 @@ const AboutPage=()=>(
             <p style={{marginTop:'20px'}}>
                 For more information, please visit the <a target="_blank" href="https://github.com/TheUcheojor/stocky">Stocky Repository </a> 
             </p>
+            
+            <p style={{marginTop:'20px'}}>
+                To get your Alpaca key, visit the <a target="_blank" href="https://alpaca.markets/">Alpaca Website </a> 
+            </p>
+           
 
         </div>
          
