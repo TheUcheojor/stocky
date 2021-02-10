@@ -3,3 +3,4 @@
 /stocky-backend/src/build
 *.env
 node_modules
+.DS_Store
