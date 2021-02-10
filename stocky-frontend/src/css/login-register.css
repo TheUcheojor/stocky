@@ -6,7 +6,7 @@
     background: #fff;
     position: absolute;
     padding: 20px;
-    width: 50%;
+    width: 40%;
     top:45%;
     right:50%;
     transform: translate(50%,-50%);
@@ -116,7 +116,7 @@
     border-color:#ff0033 ;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 760px) {
     .login-register-container{
         width:80%;
         top:50%;
