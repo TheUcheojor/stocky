@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon --exec babel-node stocky-backend/src/server.js ",
-    "devStart":"rm -rf stocky-backend/src/build && cd stocky-frontend && npm install && npm run build && mv build ../stocky-backend/src && cd .. && npm run start",
+    "devStart":"rm -rf stocky-backend/src/build && cd stocky-frontend && npm run build && mv build ../stocky-backend/src && cd .. && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,7 +20,19 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.24",
-    "string-similarity": "^4.0.4"
+    "string-similarity": "^4.0.4",
+
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "chart.js": "^2.9.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.2",
+    "sass": "^1.32.6",
+    "sweetalert2": "^10.14.0",
+    "whatwg-fetch": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
