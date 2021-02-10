@@ -42,6 +42,7 @@ function App() {
   if(!user){
     return <LoginRegisterPage setUser={setUser} />
   }
+  console.log(user)
 
   return (
 
