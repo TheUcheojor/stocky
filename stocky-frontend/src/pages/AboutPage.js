@@ -19,7 +19,7 @@ const AboutPage=()=>(
             </p>
             
             <p style={{marginTop:'20px'}}>
-                To get your Alpaca key, visit the <a target="_blank" href="https://alpaca.markets/">Alpaca Website </a> 
+                To get your Alpaca keys, visit the <a target="_blank" href="https://alpaca.markets/">Alpaca Website </a> 
             </p>
            
 
