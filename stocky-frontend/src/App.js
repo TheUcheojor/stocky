@@ -42,11 +42,8 @@ function App() {
   if(!user){
     return <LoginRegisterPage setUser={setUser} />
   }
-  console.log(user)
 
   return (
-
-  
 
       <Router>
           <div id='header' onClick={showMobileNavigationMenu}> Stocky </div>
