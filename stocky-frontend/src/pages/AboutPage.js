@@ -15,11 +15,11 @@ const AboutPage=()=>(
             </p>
 
             <p style={{marginTop:'20px'}}>
-                For more information, please visit the <a target="_blank" href="https://github.com/TheUcheojor/stocky">Stocky Repository </a> 
+                For more information, please visit the <a rel="noreferrer" target="_blank" href="https://github.com/TheUcheojor/stocky">Stocky Repository </a> 
             </p>
             
             <p style={{marginTop:'20px'}}>
-                To get your Alpaca keys, visit the <a target="_blank" href="https://alpaca.markets/">Alpaca Website </a> 
+                To get your Alpaca keys, visit the <a rel="noreferrer" target="_blank" href="https://alpaca.markets/">Alpaca Website </a> 
             </p>
            
 
