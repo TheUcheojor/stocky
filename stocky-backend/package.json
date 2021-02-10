@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon --exec babel-node src/server.js ",
-    "devStart":"rm -rf src/build && cd ../stocky-frontend && npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm run start",
+    "devStart": "rm -rf src/build && cd ../stocky-frontend && npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
