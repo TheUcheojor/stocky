@@ -170,7 +170,6 @@
   
   
   #order-history-table td, #order-history-table th {
-    /* border: 1px solid #ddd; */
     padding: 8px;
     text-align: left;
   }
@@ -195,8 +194,6 @@
   /* Manual Order */
   .manual-order{
     display: grid;
-    /* width: 88%; */
-    /* height: 85%; */
     grid-area: manual-order;
     border-radius: 5px;
     background-color: #f2f2f2;
@@ -273,7 +270,6 @@
         "live-overview "
         "manual-order"
         "order-history" ;
-    /* grid-gap: 15px; */
   }
 
   .container.account-details{

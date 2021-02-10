@@ -3,6 +3,9 @@
     margin: 0;
   }
   
+  body.swal2-height-auto{
+    height: 100vh!important;
+  }
   
   body{
     height: 100vh;
@@ -125,7 +128,6 @@
   }
   
   .username{
-    /* color: #A593E0; */
     color:#fff;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     padding: 0 10px;
@@ -183,8 +185,6 @@
     grid-area:content;
     background:#f2f2f2;
     padding: 5px 10px;
-
-    /* background:rgba(86, 98, 112, 0.75); */
   }
     /* Content SECTION - ENDS */
 
@@ -271,7 +271,6 @@
     padding: 15px 10px;
     flex-wrap:wrap-reverse;
     justify-content:right;
-      /* border-radius: 10px; */
   }
 
   #header{
