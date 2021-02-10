@@ -14,22 +14,24 @@ import connectToDatabase from './auxilliary/connectToDatabase'
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 
-//Connect to Database
-connectToDatabase()
-
-
 const app=express();
 const PORT= process.env.PORT || 8000
 
+app.use(express.static(path.join(__dirname,'/build')))
 app.use(bodyParser.json())
 
-// Start up strategies
-initiateStrategies() 
+
+connectToDatabase()//Connect to Database
+initiateStrategies() // Start up strategies
+
 
 app.use('/users',userRouter)
 app.use('/settings',settingsRouter)
 app.use('/api',apiRouter)
 
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname+'/build/index.html'))
+})
 
 app.listen(PORT,()=>{
     console.log(`App is running on PORT ${PORT}`)
