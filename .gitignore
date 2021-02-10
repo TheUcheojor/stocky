@@ -1,4 +1,4 @@
 /stocky-backend/node_modules
 /stocky-frontend/node_modules
-/stocky-backend/src/config/setup.js
+/stocky-backend/src/build
 *.env
