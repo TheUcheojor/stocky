@@ -32,7 +32,6 @@ import LoginRegisterPage from './pages/LoginRegisterPage/LoginRegisterPage'
 import useUser from './custom_hooks/useUser'
 import showMobileNavigationMenu from './support/showMobileNavigationMenu'
 
-import 'react-notifications/lib/notifications.css';
 
 
 
