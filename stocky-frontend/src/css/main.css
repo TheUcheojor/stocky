@@ -19,7 +19,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 15% 85% ;
-    grid-template-rows: 60px 90% 20px;
+    grid-template-rows: 7% 91% 2%;
   
     grid-template-areas:
      "header hor-bar "
