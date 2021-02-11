@@ -16,21 +16,26 @@ const formatNumber=(num)=>{
         sign=NEGATIVE_SIGN
         rawIntegers=rawIntegers.split(NEGATIVE_SIGN)[1]
     }
+
+
     
     //Add commas to integers
     let formattedIntegers=""
-    for(var i =0; i<rawIntegers.length; i++){
-        
-        if( (i+1)%3 ===0 ){
-            formattedIntegers+=rawIntegers[i]+", "
+    let count= 0;
+    for(var i =rawIntegers.length-1; i>=0; i--){
+        count++
+        if( (count)%3 ===0 ){
+            formattedIntegers+=rawIntegers[i]+" ,"
         }else{
             formattedIntegers+=rawIntegers[i]
         }
 
     }
 
-    formattedIntegers=(formattedIntegers[formattedIntegers.length-2]===',')?  
-                            formattedIntegers.substring(0, formattedIntegers.length-2):formattedIntegers 
+    formattedIntegers=formattedIntegers.split("").reverse().join("");
+
+    formattedIntegers=(formattedIntegers[0]===',')?  
+                            formattedIntegers.substring(2, formattedIntegers.length):formattedIntegers 
 
 
     return CASH_SYMBOL+(sign+formattedIntegers+'.'+rawDecimals)
