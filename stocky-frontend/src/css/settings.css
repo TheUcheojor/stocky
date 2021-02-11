@@ -64,4 +64,8 @@
         height: unset;
     }
 
+    .content.settings{
+        text-align: center;
+    }
+
   }
