@@ -23,13 +23,14 @@
   .account-details{
     grid-area: account-details ;
     width: 100%;
-    height: fit-content;
+    overflow: unset;
   }
   
   /* Daily Profit */
   
   .daily-profit{
     grid-area: daily-profit ;
+    overflow: unset;
   }
   
   .container-subtitles.daily-profit{
