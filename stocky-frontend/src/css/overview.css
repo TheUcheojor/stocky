@@ -276,6 +276,9 @@
         "live-overview "
         "manual-order"
         "order-history" ;
+    
+    overflow: unset;
+
   }
 
   .container.account-details{
