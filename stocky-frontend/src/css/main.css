@@ -12,6 +12,7 @@
     width: 100vw;
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
+    background: gray;
   }
    
   #root{
@@ -26,6 +27,9 @@
      "vert-bar content "
      "vert-bar footer";
   
+    max-width: 2500px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   
