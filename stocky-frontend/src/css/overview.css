@@ -46,6 +46,7 @@
   /* Live Overview */
   .live-overview{
     grid-area: live-overview ;
+    overflow: unset;
   }
   
   .overview-options{
