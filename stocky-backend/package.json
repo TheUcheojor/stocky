@@ -27,6 +27,6 @@
     "@babel/core": "^7.12.13",
     "@babel/node": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.20"
   }
 }
