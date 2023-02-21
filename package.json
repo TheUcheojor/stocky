@@ -2,20 +2,17 @@
   "name": "stocky",
   "version": "1.0.0",
   "type": "module",
-
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "cd stocky-backend && npx nodemon --exec babel-node src/server.js ",
-    "build":"rm -rf stocky-backend/src/build && cd stocky-frontend && npm install && npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install",
+    "build": "rm -rf stocky-backend/src/build && cd stocky-frontend && npm install && npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "stack": "heroku-22",
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
-  "devDependencies": {
-
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
