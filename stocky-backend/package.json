@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "npx nodemon --exec babel-node src/server.js ",
     "devStart": "rm -rf src/build && cd ../stocky-frontend && npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm run start",
