@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cd stocky-backend && npx nodemon --exec babel-node src/server.js ",
-    "build": "cd stocky-frontend && npm install && npm i -D postcss@latest&& npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install && touch public/_redirects && echo '/* /index.html 200' > public/_redirects",
+    "build": "cd stocky-frontend && npm install && npm i -D postcss@latest&& npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install && cd /src && touch public/_redirects && echo '/* /index.html 200' > public/_redirects",
     "test": "echo \"Error: no test specified\" && exit 1",
     "herokuBuild": "export NODE_OPTIONS=--openssl-legacy-provider && rm -rf stocky-backend/src/build && cd stocky-frontend && npm install && npm i -D postcss@latest&& npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install ",
     "test": "echo \"Error: no test specified\" && exit 1"
