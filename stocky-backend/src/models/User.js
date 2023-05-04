@@ -1,41 +1,44 @@
-import mongoose from 'mongoose'
-import strategyReference from '../trading/strategyReference'
+import mongoose from "mongoose";
+import strategyReference from "../trading/strategyReference.js";
 
-const userSchema=mongoose.Schema({
-    name:{
-        type:String,
-        required : [true, "Please enter a name"],
+const userSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "Please enter a name"],
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: [true, "Please enter an email"],
+    dropDups: true,
+  },
+  password: {
+    type: String,
+  },
+  alpaca: {
+    secretKey: {
+      type: String,
     },
-    email: {
-        type:String, 
-        unique : true,
-        required : [true,"Please enter an email"],
-        dropDups: true,
+    apiKey: {
+      type: String,
     },
-    password: {
-        type:String
+    stocks: [
+      {
+        type: String,
+      },
+    ],
+    logs: [
+      {
+        type: String,
+      },
+    ],
+  },
+  settings: {
+    strategy: {
+      type: String,
+      default: strategyReference.MEAN_REVERSION.key,
     },
-    alpaca:{
-        secretKey:{
-            type:String
-        },
-        apiKey:{
-            type:String
-        },
-        stocks:[{
-            type:String
-        }],
-        logs:[{
-            type:String
-        }]   
-    },
-    settings:{
-        strategy:{
-            type:String,
-            default: strategyReference.MEAN_REVERSION.key
-        },  
-    },    
-})
+  },
+});
 
-export default mongoose.model('User',userSchema,'users');
-
+export default mongoose.model("User", userSchema, "users");

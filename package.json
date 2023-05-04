@@ -1,11 +1,10 @@
 {
   "name": "stocky",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd stocky-backend && node src/server.js ",
+    "start": "cd stocky-backend && npm start ",
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && rm -rf stocky-backend/src/build && cd stocky-frontend && npm install && npm i -D postcss@latest&& npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install ",
     "Herokubuild": "export NODE_OPTIONS=--openssl-legacy-provider && rm -rf stocky-backend/src/build && cd stocky-frontend && npm install && npm i -D postcss@latest&& npm run build && mv build ../stocky-backend/src && cd ../stocky-backend && npm install ",
     "test": "echo \"Error: no test specified\" && exit 1"
