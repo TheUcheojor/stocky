@@ -4,3 +4,4 @@
 *.env
 node_modules
 .DS_Store
+stocky_server_key.pem
